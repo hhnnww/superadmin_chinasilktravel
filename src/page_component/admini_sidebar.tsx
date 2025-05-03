@@ -1,13 +1,16 @@
+import { supabase } from "@/supabase";
 import AirplaneTicketOutlinedIcon from "@mui/icons-material/AirplaneTicketOutlined";
 import ContactPhoneOutlinedIcon from "@mui/icons-material/ContactPhoneOutlined";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
+import InputOutlinedIcon from "@mui/icons-material/InputOutlined";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import WebOutlinedIcon from "@mui/icons-material/WebOutlined";
-import { Box, ListItemIcon, ListItemText, MenuItem, MenuList, type SxProps, Typography, alpha } from "@mui/material";
-import { Link } from "@tanstack/react-router";
-export const AdminSidebar = () => {
+import { Box, Button, ListItemIcon, ListItemText, MenuItem, MenuList, Stack, type SxProps, Typography, alpha } from "@mui/material";
+import { Link, useNavigate } from "@tanstack/react-router";
+
+export const AdminSidebar = (props: { email: string }) => {
 	const menu_list = [
 		{
 			title: "在线询单",
@@ -38,7 +41,7 @@ export const AdminSidebar = () => {
 	];
 	return (
 		<>
-			<SidebarLogo />
+			<SidebarLogo email={props.email} />
 			{menu_list.map((menu) => {
 				return (
 					<MenuList sx={{ padding: 0, mb: 3 }} key={menu.title}>
@@ -52,16 +55,42 @@ export const AdminSidebar = () => {
 		</>
 	);
 };
+const SidebarLogo = (props: { email: string }) => {
+	const navigate = useNavigate();
 
-const SidebarLogo = () => {
 	return (
 		<Box px={2} py={3}>
 			<Typography sx={{ color: "#fff", fontWeight: "bold", fontSize: "1.2rem" }} component={Link} to="/admin">
 				ChinaSilkTravel
 			</Typography>
-			<Typography variant="body2" sx={{ color: alpha("#fff", 0.6) }}>
-				Admin Panel
-			</Typography>
+
+			<Stack direction={"row"} spacing={1} alignItems={"center"} sx={{ textTransform: "uppercase" }}>
+				<Typography variant="body2" sx={{ color: alpha("#fff", 0.6) }}>
+					{props.email}
+				</Typography>
+				<Button
+					size="small"
+					variant="text"
+					color="inherit"
+					onClick={async () => {
+						const { error } = await supabase.auth.signOut();
+						if (error) {
+							console.log(error);
+						} else {
+							return navigate({ to: "/login" });
+						}
+					}}
+					sx={{
+						color: alpha("#fff", 0.6),
+						":hover": {
+							color: "#ffff",
+						},
+					}}
+					startIcon={<InputOutlinedIcon />}
+				>
+					logout
+				</Button>
+			</Stack>
 		</Box>
 	);
 };

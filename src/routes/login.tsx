@@ -1,7 +1,9 @@
+import { supabase } from "@/supabase";
 import { Button, Stack, TextField } from "@mui/material";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+
 export const Route = createFileRoute("/login")({
 	component: RouteComponent,
 });
@@ -13,8 +15,15 @@ function RouteComponent() {
 		defaultValues: { username: "", password: "" },
 
 		onSubmit: async (values) => {
-			console.log("Form Submitted:", values.value);
-			navigate({ to: "/admin" });
+			const { data } = await supabase.auth.signInWithPassword({
+				email: values.value.username,
+				password: values.value.password,
+			});
+			if (data.session) {
+				navigate({ to: "/admin" });
+			} else {
+				alert("账号或密码错误。");
+			}
 		},
 
 		validators: {
@@ -37,17 +46,7 @@ function RouteComponent() {
 				<Stack spacing={2} sx={{ width: "400px" }} alignItems={"start"}>
 					{(["username", "password"] as const).map((fieldName) => (
 						<form.Field key={fieldName} name={fieldName}>
-							{(field) => (
-								<TextField
-									label={fieldName}
-									type={fieldName === "password" ? "password" : "text"}
-									value={field.state.value}
-									onChange={(e) => field.handleChange(e.target.value)}
-									error={!field.state.meta.isValid}
-									helperText={field.state.meta.errors[0]?.message}
-									autoComplete="off"
-								/>
-							)}
+							{(field) => <TextField label={fieldName} type={fieldName === "password" ? "password" : "text"} value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} error={!field.state.meta.isValid} helperText={field.state.meta.errors[0]?.message} autoComplete="off" />}
 						</form.Field>
 					))}
 

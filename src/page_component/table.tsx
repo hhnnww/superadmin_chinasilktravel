@@ -15,8 +15,10 @@ export const CusTable = (props: { tableHeader: string[]; tableBody: string[][] |
 				<TableBody>
 					{props.tableBody.map((row, rowIndex) => (
 						<TableRow key={rowIndex.toString()}>
-							{row.map((header, cellIndex) => (
-								<TableCell key={cellIndex.toString()}>{header}</TableCell>
+							{row.map((item, cellIndex) => (
+								<TableCell key={cellIndex.toString()} sx={{ wordBreak: "break-all" }}>
+									{item}
+								</TableCell>
 							))}
 						</TableRow>
 					))}
