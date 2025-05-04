@@ -87,10 +87,10 @@ export const components = {
 					backgroundColor: theme.palette.TableCell.border,
 					color: theme.palette.text.primary,
 					fontWeight: 600,
-					":first-child": {
+					":first-of-type": {
 						borderTopLeftRadius: theme.shape.borderRadius,
 					},
-					":last-child": {
+					":last-of-type": {
 						borderTopRightRadius: theme.shape.borderRadius,
 					},
 				},
