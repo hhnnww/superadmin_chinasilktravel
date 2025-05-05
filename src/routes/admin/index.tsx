@@ -1,4 +1,4 @@
-import { PageTitle } from "@/page_component/page_title";
+import { TextField } from "@mui/material";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin/")({
@@ -7,8 +7,8 @@ export const Route = createFileRoute("/admin/")({
 
 function RouteComponent() {
 	return (
-		<>
-			<PageTitle title="AdminIndex" />
-		</>
+		<div>
+			<TextField label="Admin" multiline rows={20} />
+		</div>
 	);
 }

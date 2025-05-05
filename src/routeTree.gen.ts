@@ -15,18 +15,6 @@ import { Route as LoginImport } from './routes/login'
 import { Route as AdminRouteImport } from './routes/admin/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
-import { Route as AdminTravelproductRouteImport } from './routes/admin/travelproduct/route'
-import { Route as AdminGuideRouteImport } from './routes/admin/guide/route'
-import { Route as AdminGoogleAdRouteImport } from './routes/admin/googleAd/route'
-import { Route as AdminAskRouteImport } from './routes/admin/ask/route'
-import { Route as AdminAdviceRouteImport } from './routes/admin/advice/route'
-import { Route as AdminGuideIndexImport } from './routes/admin/guide/index'
-import { Route as AdminAskIndexImport } from './routes/admin/ask/index'
-import { Route as AdminAdviceIndexImport } from './routes/admin/advice/index'
-import { Route as AdminTravelproductSiteImport } from './routes/admin/travelproduct/site'
-import { Route as AdminTravelproductProductImport } from './routes/admin/travelproduct/product'
-import { Route as AdminGoogleAdSalerImport } from './routes/admin/googleAd/saler'
-import { Route as AdminGoogleAdPageImport } from './routes/admin/googleAd/page'
 
 // Create/Update Routes
 
@@ -54,78 +42,6 @@ const AdminIndexRoute = AdminIndexImport.update({
   getParentRoute: () => AdminRouteRoute,
 } as any)
 
-const AdminTravelproductRouteRoute = AdminTravelproductRouteImport.update({
-  id: '/travelproduct',
-  path: '/travelproduct',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-
-const AdminGuideRouteRoute = AdminGuideRouteImport.update({
-  id: '/guide',
-  path: '/guide',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-
-const AdminGoogleAdRouteRoute = AdminGoogleAdRouteImport.update({
-  id: '/googleAd',
-  path: '/googleAd',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-
-const AdminAskRouteRoute = AdminAskRouteImport.update({
-  id: '/ask',
-  path: '/ask',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-
-const AdminAdviceRouteRoute = AdminAdviceRouteImport.update({
-  id: '/advice',
-  path: '/advice',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-
-const AdminGuideIndexRoute = AdminGuideIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminGuideRouteRoute,
-} as any)
-
-const AdminAskIndexRoute = AdminAskIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminAskRouteRoute,
-} as any)
-
-const AdminAdviceIndexRoute = AdminAdviceIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminAdviceRouteRoute,
-} as any)
-
-const AdminTravelproductSiteRoute = AdminTravelproductSiteImport.update({
-  id: '/site',
-  path: '/site',
-  getParentRoute: () => AdminTravelproductRouteRoute,
-} as any)
-
-const AdminTravelproductProductRoute = AdminTravelproductProductImport.update({
-  id: '/product',
-  path: '/product',
-  getParentRoute: () => AdminTravelproductRouteRoute,
-} as any)
-
-const AdminGoogleAdSalerRoute = AdminGoogleAdSalerImport.update({
-  id: '/saler',
-  path: '/saler',
-  getParentRoute: () => AdminGoogleAdRouteRoute,
-} as any)
-
-const AdminGoogleAdPageRoute = AdminGoogleAdPageImport.update({
-  id: '/page',
-  path: '/page',
-  getParentRoute: () => AdminGoogleAdRouteRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -151,41 +67,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/admin/advice': {
-      id: '/admin/advice'
-      path: '/advice'
-      fullPath: '/admin/advice'
-      preLoaderRoute: typeof AdminAdviceRouteImport
-      parentRoute: typeof AdminRouteImport
-    }
-    '/admin/ask': {
-      id: '/admin/ask'
-      path: '/ask'
-      fullPath: '/admin/ask'
-      preLoaderRoute: typeof AdminAskRouteImport
-      parentRoute: typeof AdminRouteImport
-    }
-    '/admin/googleAd': {
-      id: '/admin/googleAd'
-      path: '/googleAd'
-      fullPath: '/admin/googleAd'
-      preLoaderRoute: typeof AdminGoogleAdRouteImport
-      parentRoute: typeof AdminRouteImport
-    }
-    '/admin/guide': {
-      id: '/admin/guide'
-      path: '/guide'
-      fullPath: '/admin/guide'
-      preLoaderRoute: typeof AdminGuideRouteImport
-      parentRoute: typeof AdminRouteImport
-    }
-    '/admin/travelproduct': {
-      id: '/admin/travelproduct'
-      path: '/travelproduct'
-      fullPath: '/admin/travelproduct'
-      preLoaderRoute: typeof AdminTravelproductRouteImport
-      parentRoute: typeof AdminRouteImport
-    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -193,139 +74,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexImport
       parentRoute: typeof AdminRouteImport
     }
-    '/admin/googleAd/page': {
-      id: '/admin/googleAd/page'
-      path: '/page'
-      fullPath: '/admin/googleAd/page'
-      preLoaderRoute: typeof AdminGoogleAdPageImport
-      parentRoute: typeof AdminGoogleAdRouteImport
-    }
-    '/admin/googleAd/saler': {
-      id: '/admin/googleAd/saler'
-      path: '/saler'
-      fullPath: '/admin/googleAd/saler'
-      preLoaderRoute: typeof AdminGoogleAdSalerImport
-      parentRoute: typeof AdminGoogleAdRouteImport
-    }
-    '/admin/travelproduct/product': {
-      id: '/admin/travelproduct/product'
-      path: '/product'
-      fullPath: '/admin/travelproduct/product'
-      preLoaderRoute: typeof AdminTravelproductProductImport
-      parentRoute: typeof AdminTravelproductRouteImport
-    }
-    '/admin/travelproduct/site': {
-      id: '/admin/travelproduct/site'
-      path: '/site'
-      fullPath: '/admin/travelproduct/site'
-      preLoaderRoute: typeof AdminTravelproductSiteImport
-      parentRoute: typeof AdminTravelproductRouteImport
-    }
-    '/admin/advice/': {
-      id: '/admin/advice/'
-      path: '/'
-      fullPath: '/admin/advice/'
-      preLoaderRoute: typeof AdminAdviceIndexImport
-      parentRoute: typeof AdminAdviceRouteImport
-    }
-    '/admin/ask/': {
-      id: '/admin/ask/'
-      path: '/'
-      fullPath: '/admin/ask/'
-      preLoaderRoute: typeof AdminAskIndexImport
-      parentRoute: typeof AdminAskRouteImport
-    }
-    '/admin/guide/': {
-      id: '/admin/guide/'
-      path: '/'
-      fullPath: '/admin/guide/'
-      preLoaderRoute: typeof AdminGuideIndexImport
-      parentRoute: typeof AdminGuideRouteImport
-    }
   }
 }
 
 // Create and export the route tree
 
-interface AdminAdviceRouteRouteChildren {
-  AdminAdviceIndexRoute: typeof AdminAdviceIndexRoute
-}
-
-const AdminAdviceRouteRouteChildren: AdminAdviceRouteRouteChildren = {
-  AdminAdviceIndexRoute: AdminAdviceIndexRoute,
-}
-
-const AdminAdviceRouteRouteWithChildren =
-  AdminAdviceRouteRoute._addFileChildren(AdminAdviceRouteRouteChildren)
-
-interface AdminAskRouteRouteChildren {
-  AdminAskIndexRoute: typeof AdminAskIndexRoute
-}
-
-const AdminAskRouteRouteChildren: AdminAskRouteRouteChildren = {
-  AdminAskIndexRoute: AdminAskIndexRoute,
-}
-
-const AdminAskRouteRouteWithChildren = AdminAskRouteRoute._addFileChildren(
-  AdminAskRouteRouteChildren,
-)
-
-interface AdminGoogleAdRouteRouteChildren {
-  AdminGoogleAdPageRoute: typeof AdminGoogleAdPageRoute
-  AdminGoogleAdSalerRoute: typeof AdminGoogleAdSalerRoute
-}
-
-const AdminGoogleAdRouteRouteChildren: AdminGoogleAdRouteRouteChildren = {
-  AdminGoogleAdPageRoute: AdminGoogleAdPageRoute,
-  AdminGoogleAdSalerRoute: AdminGoogleAdSalerRoute,
-}
-
-const AdminGoogleAdRouteRouteWithChildren =
-  AdminGoogleAdRouteRoute._addFileChildren(AdminGoogleAdRouteRouteChildren)
-
-interface AdminGuideRouteRouteChildren {
-  AdminGuideIndexRoute: typeof AdminGuideIndexRoute
-}
-
-const AdminGuideRouteRouteChildren: AdminGuideRouteRouteChildren = {
-  AdminGuideIndexRoute: AdminGuideIndexRoute,
-}
-
-const AdminGuideRouteRouteWithChildren = AdminGuideRouteRoute._addFileChildren(
-  AdminGuideRouteRouteChildren,
-)
-
-interface AdminTravelproductRouteRouteChildren {
-  AdminTravelproductProductRoute: typeof AdminTravelproductProductRoute
-  AdminTravelproductSiteRoute: typeof AdminTravelproductSiteRoute
-}
-
-const AdminTravelproductRouteRouteChildren: AdminTravelproductRouteRouteChildren =
-  {
-    AdminTravelproductProductRoute: AdminTravelproductProductRoute,
-    AdminTravelproductSiteRoute: AdminTravelproductSiteRoute,
-  }
-
-const AdminTravelproductRouteRouteWithChildren =
-  AdminTravelproductRouteRoute._addFileChildren(
-    AdminTravelproductRouteRouteChildren,
-  )
-
 interface AdminRouteRouteChildren {
-  AdminAdviceRouteRoute: typeof AdminAdviceRouteRouteWithChildren
-  AdminAskRouteRoute: typeof AdminAskRouteRouteWithChildren
-  AdminGoogleAdRouteRoute: typeof AdminGoogleAdRouteRouteWithChildren
-  AdminGuideRouteRoute: typeof AdminGuideRouteRouteWithChildren
-  AdminTravelproductRouteRoute: typeof AdminTravelproductRouteRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminAdviceRouteRoute: AdminAdviceRouteRouteWithChildren,
-  AdminAskRouteRoute: AdminAskRouteRouteWithChildren,
-  AdminGoogleAdRouteRoute: AdminGoogleAdRouteRouteWithChildren,
-  AdminGuideRouteRoute: AdminGuideRouteRouteWithChildren,
-  AdminTravelproductRouteRoute: AdminTravelproductRouteRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
 
@@ -337,34 +95,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
-  '/admin/advice': typeof AdminAdviceRouteRouteWithChildren
-  '/admin/ask': typeof AdminAskRouteRouteWithChildren
-  '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
-  '/admin/guide': typeof AdminGuideRouteRouteWithChildren
-  '/admin/travelproduct': typeof AdminTravelproductRouteRouteWithChildren
   '/admin/': typeof AdminIndexRoute
-  '/admin/googleAd/page': typeof AdminGoogleAdPageRoute
-  '/admin/googleAd/saler': typeof AdminGoogleAdSalerRoute
-  '/admin/travelproduct/product': typeof AdminTravelproductProductRoute
-  '/admin/travelproduct/site': typeof AdminTravelproductSiteRoute
-  '/admin/advice/': typeof AdminAdviceIndexRoute
-  '/admin/ask/': typeof AdminAskIndexRoute
-  '/admin/guide/': typeof AdminGuideIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
-  '/admin/travelproduct': typeof AdminTravelproductRouteRouteWithChildren
   '/admin': typeof AdminIndexRoute
-  '/admin/googleAd/page': typeof AdminGoogleAdPageRoute
-  '/admin/googleAd/saler': typeof AdminGoogleAdSalerRoute
-  '/admin/travelproduct/product': typeof AdminTravelproductProductRoute
-  '/admin/travelproduct/site': typeof AdminTravelproductSiteRoute
-  '/admin/advice': typeof AdminAdviceIndexRoute
-  '/admin/ask': typeof AdminAskIndexRoute
-  '/admin/guide': typeof AdminGuideIndexRoute
 }
 
 export interface FileRoutesById {
@@ -372,72 +109,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
-  '/admin/advice': typeof AdminAdviceRouteRouteWithChildren
-  '/admin/ask': typeof AdminAskRouteRouteWithChildren
-  '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
-  '/admin/guide': typeof AdminGuideRouteRouteWithChildren
-  '/admin/travelproduct': typeof AdminTravelproductRouteRouteWithChildren
   '/admin/': typeof AdminIndexRoute
-  '/admin/googleAd/page': typeof AdminGoogleAdPageRoute
-  '/admin/googleAd/saler': typeof AdminGoogleAdSalerRoute
-  '/admin/travelproduct/product': typeof AdminTravelproductProductRoute
-  '/admin/travelproduct/site': typeof AdminTravelproductSiteRoute
-  '/admin/advice/': typeof AdminAdviceIndexRoute
-  '/admin/ask/': typeof AdminAskIndexRoute
-  '/admin/guide/': typeof AdminGuideIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/admin'
-    | '/login'
-    | '/admin/advice'
-    | '/admin/ask'
-    | '/admin/googleAd'
-    | '/admin/guide'
-    | '/admin/travelproduct'
-    | '/admin/'
-    | '/admin/googleAd/page'
-    | '/admin/googleAd/saler'
-    | '/admin/travelproduct/product'
-    | '/admin/travelproduct/site'
-    | '/admin/advice/'
-    | '/admin/ask/'
-    | '/admin/guide/'
+  fullPaths: '/' | '/admin' | '/login' | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/login'
-    | '/admin/googleAd'
-    | '/admin/travelproduct'
-    | '/admin'
-    | '/admin/googleAd/page'
-    | '/admin/googleAd/saler'
-    | '/admin/travelproduct/product'
-    | '/admin/travelproduct/site'
-    | '/admin/advice'
-    | '/admin/ask'
-    | '/admin/guide'
-  id:
-    | '__root__'
-    | '/'
-    | '/admin'
-    | '/login'
-    | '/admin/advice'
-    | '/admin/ask'
-    | '/admin/googleAd'
-    | '/admin/guide'
-    | '/admin/travelproduct'
-    | '/admin/'
-    | '/admin/googleAd/page'
-    | '/admin/googleAd/saler'
-    | '/admin/travelproduct/product'
-    | '/admin/travelproduct/site'
-    | '/admin/advice/'
-    | '/admin/ask/'
-    | '/admin/guide/'
+  to: '/' | '/login' | '/admin'
+  id: '__root__' | '/' | '/admin' | '/login' | '/admin/'
   fileRoutesById: FileRoutesById
 }
 
@@ -474,85 +154,15 @@ export const routeTree = rootRoute
     "/admin": {
       "filePath": "admin/route.tsx",
       "children": [
-        "/admin/advice",
-        "/admin/ask",
-        "/admin/googleAd",
-        "/admin/guide",
-        "/admin/travelproduct",
         "/admin/"
       ]
     },
     "/login": {
       "filePath": "login.tsx"
     },
-    "/admin/advice": {
-      "filePath": "admin/advice/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/advice/"
-      ]
-    },
-    "/admin/ask": {
-      "filePath": "admin/ask/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/ask/"
-      ]
-    },
-    "/admin/googleAd": {
-      "filePath": "admin/googleAd/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/googleAd/page",
-        "/admin/googleAd/saler"
-      ]
-    },
-    "/admin/guide": {
-      "filePath": "admin/guide/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/guide/"
-      ]
-    },
-    "/admin/travelproduct": {
-      "filePath": "admin/travelproduct/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/travelproduct/product",
-        "/admin/travelproduct/site"
-      ]
-    },
     "/admin/": {
       "filePath": "admin/index.tsx",
       "parent": "/admin"
-    },
-    "/admin/googleAd/page": {
-      "filePath": "admin/googleAd/page.tsx",
-      "parent": "/admin/googleAd"
-    },
-    "/admin/googleAd/saler": {
-      "filePath": "admin/googleAd/saler.tsx",
-      "parent": "/admin/googleAd"
-    },
-    "/admin/travelproduct/product": {
-      "filePath": "admin/travelproduct/product.tsx",
-      "parent": "/admin/travelproduct"
-    },
-    "/admin/travelproduct/site": {
-      "filePath": "admin/travelproduct/site.tsx",
-      "parent": "/admin/travelproduct"
-    },
-    "/admin/advice/": {
-      "filePath": "admin/advice/index.tsx",
-      "parent": "/admin/advice"
-    },
-    "/admin/ask/": {
-      "filePath": "admin/ask/index.tsx",
-      "parent": "/admin/ask"
-    },
-    "/admin/guide/": {
-      "filePath": "admin/guide/index.tsx",
-      "parent": "/admin/guide"
     }
   }
 }

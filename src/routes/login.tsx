@@ -1,64 +1,68 @@
 import { supabase } from "@/supabase";
-import { Button, Stack, TextField } from "@mui/material";
-import { useForm } from "@tanstack/react-form";
-import { createFileRoute } from "@tanstack/react-router";
+import { useAppForm } from "@/tanstack-form-component";
+import { Stack } from "@mui/material";
+import { formOptions } from "@tanstack/react-form";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 
 export const Route = createFileRoute("/login")({
 	component: RouteComponent,
+	beforeLoad: async () => {
+		const { data } = await supabase.auth.getSession();
+		if (data.session) {
+			throw redirect({ to: "/admin" });
+		}
+	},
 });
 
 function RouteComponent() {
 	const navigate = Route.useNavigate();
 
-	const form = useForm({
-		defaultValues: { username: "", password: "" },
-
-		onSubmit: async (values) => {
-			const { data } = await supabase.auth.signInWithPassword({
-				email: values.value.username,
-				password: values.value.password,
-			});
-			if (data.session) {
-				navigate({ to: "/admin" });
-			} else {
-				alert("账号或密码错误。");
-			}
-		},
-
+	const form = useAppForm({
+		...formOptions({
+			defaultValues: {
+				email: "",
+				password: "",
+			},
+		}),
 		validators: {
-			onChange: z.object({
-				username: z.string().email("invalid email"),
-				password: z.string().min(1, "password is required"),
+			onBlur: z.object({
+				email: z.string().email({ message: "Invalid email address" }),
+				password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 			}),
+		},
+		onSubmit: async ({ value }) => {
+			const res = await supabase.auth.signInWithPassword({
+				email: value.email,
+				password: value.password,
+			});
+			if (res.error) {
+				alert(res.error.message);
+				return;
+			}
+			navigate({ to: "/admin" });
 		},
 	});
 
 	return (
-		<Stack justifyContent="center" alignItems="center" height="100vh">
-			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					form.handleSubmit();
-				}}
-			>
-				<Stack spacing={2} sx={{ width: "400px" }} alignItems={"start"}>
-					{(["username", "password"] as const).map((fieldName) => (
-						<form.Field key={fieldName} name={fieldName}>
-							{(field) => <TextField label={fieldName} type={fieldName === "password" ? "password" : "text"} value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} error={!field.state.meta.isValid} helperText={field.state.meta.errors[0]?.message} autoComplete="off" />}
-						</form.Field>
-					))}
-
-					<form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-						{([canSubmit, isSubmitting]) => (
-							<Button disabled={!canSubmit} type="submit">
-								{isSubmitting ? "..." : "login"}
-							</Button>
-						)}
-					</form.Subscribe>
-				</Stack>
-			</form>
-		</Stack>
+		<>
+			<Stack sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						form.handleSubmit();
+					}}
+				>
+					<Stack spacing={2} sx={{ width: 300 }} alignItems={"start"}>
+						<form.AppField name="email">{(field) => <field.TextField type="email" />}</form.AppField>
+						<form.AppField name="password">{(field) => <field.TextField type="password" />}</form.AppField>
+						<form.AppForm>
+							<form.SubscribeButton label="Submit" />
+						</form.AppForm>
+					</Stack>
+				</form>
+			</Stack>
+		</>
 	);
 }
