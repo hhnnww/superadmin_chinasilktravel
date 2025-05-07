@@ -1,35 +1,34 @@
 import { supabase } from "@/supabase";
-import { Container, Grid } from "@mui/material";
+import { Container, Divider, Grid } from "@mui/material";
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
-import { AdminHeader } from "./-header";
-import { AdminSidebar } from "./-sidebar";
+import { AdminHeader } from "./-admin-header";
+import { AdminSidebar } from "./-admin-sidebar";
 
 export const Route = createFileRoute("/admin")({
 	component: RouteComponent,
-
 	beforeLoad: async () => {
 		const { data } = await supabase.auth.getSession();
 		if (!data.session) {
 			throw redirect({ to: "/login" });
 		}
 	},
-
 	loader: async () => {
 		return await supabase.auth.getSession();
 	},
 });
 
 function RouteComponent() {
-	const { data } = Route.useLoaderData();
+	const session = Route.useLoaderData();
 	return (
 		<>
-			<AdminHeader email={data.session?.user.email || ""} />
+			<AdminHeader email={session.data.session?.user.email || ""} />
 			<Grid container>
-				<Grid sx={{ width: "300px", minHeight: "100vh", p: 2 }}>
+				<Grid size={"auto"} sx={{ width: 300, height: "100vh" }}>
 					<AdminSidebar />
 				</Grid>
+				<Divider orientation="vertical" flexItem />
 				<Grid size={"grow"}>
-					<Container maxWidth="lg" sx={{ py: 12 }}>
+					<Container sx={{ py: 18 }}>
 						<Grid container spacing={6}>
 							<Outlet />
 						</Grid>

@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/admin/googleAdpage/page")({
+export const Route = createFileRoute("/admin/googleAd/saler")({
 	component: RouteComponent,
 });
 

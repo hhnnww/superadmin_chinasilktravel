@@ -31,8 +31,8 @@ function SubscribeButton(props: ButtonProps & { children: ReactNode }) {
 			{() => (
 				<Button
 					{...props}
-					onClick={() => {
-						form.handleSubmit();
+					onClick={async () => {
+						await form.handleSubmit();
 					}}
 				>
 					{props.children}

@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
 	cssVariables: true,
-
+	defaultColorScheme: "dark",
 	typography: {
 		fontFamily: ["Montserrat", "sans-serif"].join(","),
 
@@ -12,16 +12,13 @@ export const theme = createTheme({
 		fontWeightMedium: 600,
 		fontWeightBold: 700,
 	},
+
 	colorSchemes: {
-		light: {
+		dark: {
 			palette: {
-				mode: "light",
+				mode: "dark",
 				primary: {
 					main: "rgb(41, 112, 255);",
-				},
-				text: {
-					primary: "#363636",
-					secondary: "#696969",
 				},
 			},
 		},
@@ -52,7 +49,7 @@ export const theme = createTheme({
 				root: ({ theme }) => ({
 					input: {
 						":-webkit-autofill": {
-							boxShadow: `0 0 0 1000px ${"#efefef"} inset`,
+							boxShadow: `0 0 0 1000px ${theme.palette.background.default} inset`,
 							WebkitTextFillColor: theme.palette.text.primary,
 						},
 					},

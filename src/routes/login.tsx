@@ -1,10 +1,8 @@
 import { supabase } from "@/supabase";
-import { useAppForm } from "@/tanstack-form-component";
+import { useAppForm } from "@/tanstack-form-content";
 import { Stack } from "@mui/material";
-import { formOptions } from "@tanstack/react-form";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
-
 export const Route = createFileRoute("/login")({
 	component: RouteComponent,
 	beforeLoad: async () => {
@@ -17,52 +15,48 @@ export const Route = createFileRoute("/login")({
 
 function RouteComponent() {
 	const navigate = Route.useNavigate();
-
 	const form = useAppForm({
-		...formOptions({
-			defaultValues: {
-				email: "",
-				password: "",
-			},
-		}),
-		validators: {
-			onBlur: z.object({
-				email: z.string().email({ message: "Invalid email address" }),
-				password: z.string().min(6, { message: "Password must be at least 6 characters" }),
-			}),
+		defaultValues: {
+			email: "",
+			password: "",
 		},
-		onSubmit: async ({ value }) => {
+		onSubmit: async (values) => {
 			const res = await supabase.auth.signInWithPassword({
-				email: value.email,
-				password: value.password,
+				email: values.value.email,
+				password: values.value.password,
 			});
 			if (res.error) {
-				alert(res.error.message);
-				return;
+				alert(`Login failed: ${res.error?.message}`);
 			}
-			navigate({ to: "/admin" });
+			if (!res.error) {
+				navigate({ to: "/admin" });
+			}
+		},
+		validators: {
+			onSubmit: z.object({
+				email: z.string().email(),
+				password: z.string().min(6),
+			}),
 		},
 	});
 
 	return (
-		<>
-			<Stack sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
-				<form
-					onSubmit={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
-						form.handleSubmit();
-					}}
-				>
-					<Stack spacing={2} sx={{ width: 300 }} alignItems={"start"}>
-						<form.AppField name="email">{(field) => <field.TextField type="email" />}</form.AppField>
-						<form.AppField name="password">{(field) => <field.TextField type="password" />}</form.AppField>
-						<form.AppForm>
-							<form.SubscribeButton>login</form.SubscribeButton>
-						</form.AppForm>
-					</Stack>
-				</form>
-			</Stack>
-		</>
+		<Stack width={"100vw"} height={"100vh"} justifyContent="center" alignItems="center">
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					form.handleSubmit();
+				}}
+			>
+				<Stack spacing={2} alignItems={"start"} sx={{ width: "450px" }}>
+					<form.AppField name="email">{(field) => <field.TextField autoComplete="off" />}</form.AppField>
+					<form.AppField name="password">{(field) => <field.TextField type="password" autoComplete="off" />}</form.AppField>
+					<form.AppForm>
+						<form.Subscribe selector={(state) => [state.isSubmitting, state.canSubmit]}>{([isSubmitting, canSubmit]) => <form.SubscribeButton disabled={isSubmitting || !canSubmit}>login</form.SubscribeButton>}</form.Subscribe>
+					</form.AppForm>
+				</Stack>
+			</form>
+		</Stack>
 	);
 }
