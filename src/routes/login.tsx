@@ -58,7 +58,7 @@ function RouteComponent() {
 						<form.AppField name="email">{(field) => <field.TextField type="email" />}</form.AppField>
 						<form.AppField name="password">{(field) => <field.TextField type="password" />}</form.AppField>
 						<form.AppForm>
-							<form.SubscribeButton label="Submit" />
+							<form.SubscribeButton>login</form.SubscribeButton>
 						</form.AppForm>
 					</Stack>
 				</form>

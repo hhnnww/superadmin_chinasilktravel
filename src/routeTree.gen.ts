@@ -15,6 +15,11 @@ import { Route as LoginImport } from './routes/login'
 import { Route as AdminRouteImport } from './routes/admin/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AdminGoogleAdpageRouteImport } from './routes/admin/googleAdpage/route'
+import { Route as AdminGoogleAdpageSalerImport } from './routes/admin/googleAdpage/saler'
+import { Route as AdminGoogleAdpagePageImport } from './routes/admin/googleAdpage/page'
+import { Route as AdminGoogleAdpagePageIndexImport } from './routes/admin/googleAdpage/page.index'
+import { Route as AdminGoogleAdpagePageIdImport } from './routes/admin/googleAdpage/page.$id'
 
 // Create/Update Routes
 
@@ -42,6 +47,38 @@ const AdminIndexRoute = AdminIndexImport.update({
   getParentRoute: () => AdminRouteRoute,
 } as any)
 
+const AdminGoogleAdpageRouteRoute = AdminGoogleAdpageRouteImport.update({
+  id: '/googleAdpage',
+  path: '/googleAdpage',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+
+const AdminGoogleAdpageSalerRoute = AdminGoogleAdpageSalerImport.update({
+  id: '/saler',
+  path: '/saler',
+  getParentRoute: () => AdminGoogleAdpageRouteRoute,
+} as any)
+
+const AdminGoogleAdpagePageRoute = AdminGoogleAdpagePageImport.update({
+  id: '/page',
+  path: '/page',
+  getParentRoute: () => AdminGoogleAdpageRouteRoute,
+} as any)
+
+const AdminGoogleAdpagePageIndexRoute = AdminGoogleAdpagePageIndexImport.update(
+  {
+    id: '/',
+    path: '/',
+    getParentRoute: () => AdminGoogleAdpagePageRoute,
+  } as any,
+)
+
+const AdminGoogleAdpagePageIdRoute = AdminGoogleAdpagePageIdImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminGoogleAdpagePageRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -67,6 +104,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/admin/googleAdpage': {
+      id: '/admin/googleAdpage'
+      path: '/googleAdpage'
+      fullPath: '/admin/googleAdpage'
+      preLoaderRoute: typeof AdminGoogleAdpageRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -74,16 +118,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexImport
       parentRoute: typeof AdminRouteImport
     }
+    '/admin/googleAdpage/page': {
+      id: '/admin/googleAdpage/page'
+      path: '/page'
+      fullPath: '/admin/googleAdpage/page'
+      preLoaderRoute: typeof AdminGoogleAdpagePageImport
+      parentRoute: typeof AdminGoogleAdpageRouteImport
+    }
+    '/admin/googleAdpage/saler': {
+      id: '/admin/googleAdpage/saler'
+      path: '/saler'
+      fullPath: '/admin/googleAdpage/saler'
+      preLoaderRoute: typeof AdminGoogleAdpageSalerImport
+      parentRoute: typeof AdminGoogleAdpageRouteImport
+    }
+    '/admin/googleAdpage/page/$id': {
+      id: '/admin/googleAdpage/page/$id'
+      path: '/$id'
+      fullPath: '/admin/googleAdpage/page/$id'
+      preLoaderRoute: typeof AdminGoogleAdpagePageIdImport
+      parentRoute: typeof AdminGoogleAdpagePageImport
+    }
+    '/admin/googleAdpage/page/': {
+      id: '/admin/googleAdpage/page/'
+      path: '/'
+      fullPath: '/admin/googleAdpage/page/'
+      preLoaderRoute: typeof AdminGoogleAdpagePageIndexImport
+      parentRoute: typeof AdminGoogleAdpagePageImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AdminGoogleAdpagePageRouteChildren {
+  AdminGoogleAdpagePageIdRoute: typeof AdminGoogleAdpagePageIdRoute
+  AdminGoogleAdpagePageIndexRoute: typeof AdminGoogleAdpagePageIndexRoute
+}
+
+const AdminGoogleAdpagePageRouteChildren: AdminGoogleAdpagePageRouteChildren = {
+  AdminGoogleAdpagePageIdRoute: AdminGoogleAdpagePageIdRoute,
+  AdminGoogleAdpagePageIndexRoute: AdminGoogleAdpagePageIndexRoute,
+}
+
+const AdminGoogleAdpagePageRouteWithChildren =
+  AdminGoogleAdpagePageRoute._addFileChildren(
+    AdminGoogleAdpagePageRouteChildren,
+  )
+
+interface AdminGoogleAdpageRouteRouteChildren {
+  AdminGoogleAdpagePageRoute: typeof AdminGoogleAdpagePageRouteWithChildren
+  AdminGoogleAdpageSalerRoute: typeof AdminGoogleAdpageSalerRoute
+}
+
+const AdminGoogleAdpageRouteRouteChildren: AdminGoogleAdpageRouteRouteChildren =
+  {
+    AdminGoogleAdpagePageRoute: AdminGoogleAdpagePageRouteWithChildren,
+    AdminGoogleAdpageSalerRoute: AdminGoogleAdpageSalerRoute,
+  }
+
+const AdminGoogleAdpageRouteRouteWithChildren =
+  AdminGoogleAdpageRouteRoute._addFileChildren(
+    AdminGoogleAdpageRouteRouteChildren,
+  )
+
 interface AdminRouteRouteChildren {
+  AdminGoogleAdpageRouteRoute: typeof AdminGoogleAdpageRouteRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminGoogleAdpageRouteRoute: AdminGoogleAdpageRouteRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
 
@@ -95,13 +200,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
+  '/admin/googleAdpage': typeof AdminGoogleAdpageRouteRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/admin/googleAdpage/page': typeof AdminGoogleAdpagePageRouteWithChildren
+  '/admin/googleAdpage/saler': typeof AdminGoogleAdpageSalerRoute
+  '/admin/googleAdpage/page/$id': typeof AdminGoogleAdpagePageIdRoute
+  '/admin/googleAdpage/page/': typeof AdminGoogleAdpagePageIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/admin/googleAdpage': typeof AdminGoogleAdpageRouteRouteWithChildren
   '/admin': typeof AdminIndexRoute
+  '/admin/googleAdpage/saler': typeof AdminGoogleAdpageSalerRoute
+  '/admin/googleAdpage/page/$id': typeof AdminGoogleAdpagePageIdRoute
+  '/admin/googleAdpage/page': typeof AdminGoogleAdpagePageIndexRoute
 }
 
 export interface FileRoutesById {
@@ -109,15 +223,46 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
+  '/admin/googleAdpage': typeof AdminGoogleAdpageRouteRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/admin/googleAdpage/page': typeof AdminGoogleAdpagePageRouteWithChildren
+  '/admin/googleAdpage/saler': typeof AdminGoogleAdpageSalerRoute
+  '/admin/googleAdpage/page/$id': typeof AdminGoogleAdpagePageIdRoute
+  '/admin/googleAdpage/page/': typeof AdminGoogleAdpagePageIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/login' | '/admin/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/login'
+    | '/admin/googleAdpage'
+    | '/admin/'
+    | '/admin/googleAdpage/page'
+    | '/admin/googleAdpage/saler'
+    | '/admin/googleAdpage/page/$id'
+    | '/admin/googleAdpage/page/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/admin'
-  id: '__root__' | '/' | '/admin' | '/login' | '/admin/'
+  to:
+    | '/'
+    | '/login'
+    | '/admin/googleAdpage'
+    | '/admin'
+    | '/admin/googleAdpage/saler'
+    | '/admin/googleAdpage/page/$id'
+    | '/admin/googleAdpage/page'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/login'
+    | '/admin/googleAdpage'
+    | '/admin/'
+    | '/admin/googleAdpage/page'
+    | '/admin/googleAdpage/saler'
+    | '/admin/googleAdpage/page/$id'
+    | '/admin/googleAdpage/page/'
   fileRoutesById: FileRoutesById
 }
 
@@ -154,15 +299,44 @@ export const routeTree = rootRoute
     "/admin": {
       "filePath": "admin/route.tsx",
       "children": [
+        "/admin/googleAdpage",
         "/admin/"
       ]
     },
     "/login": {
       "filePath": "login.tsx"
     },
+    "/admin/googleAdpage": {
+      "filePath": "admin/googleAdpage/route.tsx",
+      "parent": "/admin",
+      "children": [
+        "/admin/googleAdpage/page",
+        "/admin/googleAdpage/saler"
+      ]
+    },
     "/admin/": {
       "filePath": "admin/index.tsx",
       "parent": "/admin"
+    },
+    "/admin/googleAdpage/page": {
+      "filePath": "admin/googleAdpage/page.tsx",
+      "parent": "/admin/googleAdpage",
+      "children": [
+        "/admin/googleAdpage/page/$id",
+        "/admin/googleAdpage/page/"
+      ]
+    },
+    "/admin/googleAdpage/saler": {
+      "filePath": "admin/googleAdpage/saler.tsx",
+      "parent": "/admin/googleAdpage"
+    },
+    "/admin/googleAdpage/page/$id": {
+      "filePath": "admin/googleAdpage/page.$id.tsx",
+      "parent": "/admin/googleAdpage/page"
+    },
+    "/admin/googleAdpage/page/": {
+      "filePath": "admin/googleAdpage/page.index.tsx",
+      "parent": "/admin/googleAdpage/page"
     }
   }
 }

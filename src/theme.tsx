@@ -1,9 +1,11 @@
-import { alpha, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
 	cssVariables: true,
+
 	typography: {
 		fontFamily: ["Montserrat", "sans-serif"].join(","),
+
 		fontSize: 15,
 		fontWeightLight: 300,
 		fontWeightRegular: 500,
@@ -14,14 +16,12 @@ export const theme = createTheme({
 		light: {
 			palette: {
 				mode: "light",
-				divider: alpha("#000", 0.05),
-				text: {
-					primary: alpha("#000", 0.7),
-					secondary: alpha("#000", 0.5),
+				primary: {
+					main: "rgb(41, 112, 255);",
 				},
-				background: {
-					default: alpha("#000", 0.05),
-					paper: "#fff",
+				text: {
+					primary: "#363636",
+					secondary: "#696969",
 				},
 			},
 		},
@@ -43,6 +43,7 @@ export const theme = createTheme({
 			styleOverrides: {
 				root: {
 					textTransform: "none",
+					borderRadius: "12px",
 				},
 			},
 		},
@@ -51,8 +52,8 @@ export const theme = createTheme({
 				root: ({ theme }) => ({
 					input: {
 						":-webkit-autofill": {
-							boxShadow: `0 0 0 1000px ${"#dcdcdc"} inset`,
-							"-webkit-text-fill-color": theme.palette.text.primary,
+							boxShadow: `0 0 0 1000px ${"#efefef"} inset`,
+							WebkitTextFillColor: theme.palette.text.primary,
 						},
 					},
 				}),
