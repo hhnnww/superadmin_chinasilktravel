@@ -3,6 +3,7 @@ import { useAppForm } from "@/tanstack-form-content";
 import { Alert, Divider, Grid, Typography } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import type { Database } from "database.types";
+
 export const EditForm = (props: { value: Database["public"]["Tables"]["googleAdPage"]["Row"] } & { label?: string }) => {
 	const mutation = useMutation({
 		mutationFn: async (data: Database["public"]["Tables"]["googleAdPage"]["Row"]) => await supabase.from("googleAdPage").update(data).eq("id", data.id),
@@ -58,7 +59,7 @@ export const EditForm = (props: { value: Database["public"]["Tables"]["googleAdP
 				)}
 				<Grid size={12}>
 					<form.AppForm>
-						<form.Subscribe selector={(state) => [state.isSubmitting, state.canSubmit]}>{([isSubmitting, canSubmit]) => <form.SubscribeButton disabled={isSubmitting || !canSubmit}>Update</form.SubscribeButton>}</form.Subscribe>
+						<form.Subscribe>{() => <form.SubscribeButton>Update</form.SubscribeButton>}</form.Subscribe>
 					</form.AppForm>
 				</Grid>
 				<Grid size={12}>

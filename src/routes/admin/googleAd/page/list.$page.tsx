@@ -6,22 +6,15 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { Button, Grid, Skeleton, Stack, Typography } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+
 export const Route = createFileRoute("/admin/googleAd/page/list/$page")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const { page } = Route.useParams();
-	const limit = 10;
 	const query = useQuery({
 		queryKey: ["googleAdPageList"],
-		queryFn: async () =>
-			await supabase
-				.from("googleAdPage")
-				.select("id,title")
-				.is("parnet_id", null)
-				.order("id")
-				.range((Number(page) - 1) * limit, Number(page) * limit - 1),
+		queryFn: async () => await supabase.from("googleAdPage").select("id,title").is("parnet_id", null).order("id"),
 	});
 
 	const table_headers = ["TITLE", "ACTION"];
@@ -40,7 +33,7 @@ function RouteComponent() {
 
 	return (
 		<>
-			<PageTitle title={"Google广告页面"} sub_header={<AddButton />} />
+			<PageTitle title={"GoogleAdPage"} sub_header={<AddButton />} />
 			{query.isFetching ? (
 				<Stack direction={"column"} spacing={0}>
 					{Array.from({ length: 8 }).map((_, index) => (
@@ -75,7 +68,7 @@ const AddButton = () => {
 			disabled={mutation.isPending}
 			startIcon={<AddOutlinedIcon />}
 		>
-			新建广告页面
+			Add New Google Ad Page
 		</Button>
 	);
 };

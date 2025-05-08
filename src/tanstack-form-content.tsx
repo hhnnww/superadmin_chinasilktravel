@@ -21,6 +21,7 @@ const TextField = (props: TextFieldProps) => {
 			helperText={field.state.meta.errors.map((item) => item.message).join("")}
 			type={props?.type ? props.type : "text"}
 			autoComplete="off"
+			fullWidth
 		/>
 	);
 };
@@ -35,6 +36,7 @@ function SubscribeButton(props: ButtonProps & { children: ReactNode }) {
 					onClick={async () => {
 						await form.handleSubmit();
 					}}
+					disabled={form.state.isSubmitting || !form.state.canSubmit}
 				>
 					{props.children}
 				</Button>

@@ -69,7 +69,7 @@ const NewCommentButton = (props: { parnet_id: number }) => {
 	});
 	return (
 		<Button disabled={mutation.isPending} fullWidth size={"large"} onClick={async () => await mutation.mutateAsync()}>
-			New Comment
+			Add New Comment
 		</Button>
 	);
 };
