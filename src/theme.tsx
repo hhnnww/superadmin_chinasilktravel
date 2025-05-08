@@ -49,8 +49,10 @@ export const theme = createTheme({
 				root: ({ theme }) => ({
 					input: {
 						":-webkit-autofill": {
-							boxShadow: `0 0 0 1000px ${theme.palette.background.default} inset`,
+							WebkitBoxShadow: "none",
 							WebkitTextFillColor: theme.palette.text.primary,
+							caretColor: theme.palette.text.primary,
+							transition: "background-color 5000s ease-in-out 0s",
 						},
 					},
 				}),

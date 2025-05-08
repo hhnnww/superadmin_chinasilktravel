@@ -22,12 +22,12 @@ function RouteComponent() {
 	return (
 		<>
 			<AdminHeader email={session.data.session?.user.email || ""} />
-			<Grid container>
-				<Grid size={"auto"} sx={{ width: 300, height: "100vh" }}>
+			<Grid container sx={{ mt: "70px" }}>
+				<Grid size={"auto"} sx={{ width: 300, height: "100vh", position: "fixed" }}>
 					<AdminSidebar />
 				</Grid>
 				<Divider orientation="vertical" flexItem />
-				<Grid size={"grow"}>
+				<Grid size={"grow"} sx={{ ml: "300px" }}>
 					<Container sx={{ py: 18 }}>
 						<Grid container spacing={6}>
 							<Outlet />

@@ -13,12 +13,16 @@ export const AdminSidebar = () => {
 				{ title: "谷歌广告销售", path: { to: "/admin/googleAd/saler/list/$page", params: { page: "1" } } as LinkProps, icon: <ContactPhoneOutlinedIcon /> },
 			],
 		},
+		{
+			title: "ImageLibrary",
+			menus: [{ title: "图片库", path: { to: "/admin/ImageLibrary/list/$num", params: { num: "1" } } as LinkProps, icon: <SourceOutlinedIcon /> }],
+		},
 	];
 	const theme = useTheme();
 	return (
 		<Box my={2}>
 			{sidebar_menus.map((menu) => (
-				<List subheader={<ListSubheader>{menu.title}</ListSubheader>} key={menu.title}>
+				<List sx={{ mb: 2 }} subheader={<ListSubheader>{menu.title}</ListSubheader>} key={menu.title}>
 					{menu.menus.map((subMenu) => (
 						<CustomListItemButton
 							sx={{

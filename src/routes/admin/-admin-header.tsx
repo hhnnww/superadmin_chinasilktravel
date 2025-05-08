@@ -6,7 +6,7 @@ import { useNavigate } from "@tanstack/react-router";
 export const AdminHeader = (props: { email: string }) => {
 	const navigate = useNavigate();
 	return (
-		<AppBar position="static" variant="outlined" color="inherit">
+		<AppBar position="fixed" variant="outlined" color="inherit">
 			<Toolbar>
 				<Stack flexGrow={1}>
 					<Box>
@@ -20,9 +20,8 @@ export const AdminHeader = (props: { email: string }) => {
 					<Button
 						color="inherit"
 						variant={"text"}
-						onClick={async () => {
-							await supabase.auth.signOut();
-							navigate({ to: "/login" });
+						onClick={() => {
+							supabase.auth.signOut().then(() => navigate({ to: "/login" }));
 						}}
 					>
 						Logout
