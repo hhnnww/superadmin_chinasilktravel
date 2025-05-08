@@ -29,9 +29,10 @@ export const AdminSidebar = () => {
 							key={subMenu.title}
 							to={subMenu.path.to}
 							params={subMenu.path.params}
+							divider
 						>
 							<ListItemIcon>{subMenu?.icon ? subMenu.icon : "0"}</ListItemIcon>
-							<ListItemText primary={subMenu.title} />
+							<ListItemText sx={{ span: { fontSize: "15px" } }} primary={subMenu.title} />
 						</CustomListItemButton>
 					))}
 				</List>

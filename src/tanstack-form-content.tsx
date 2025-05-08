@@ -20,6 +20,7 @@ const TextField = (props: TextFieldProps) => {
 			onChange={(e) => field.handleChange(e.target.value)}
 			helperText={field.state.meta.errors.map((item) => item.message).join("")}
 			type={props?.type ? props.type : "text"}
+			autoComplete="off"
 		/>
 	);
 };
