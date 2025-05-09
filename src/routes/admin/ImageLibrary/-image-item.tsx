@@ -1,30 +1,39 @@
 import { supabase } from "@/supabase";
-import { Button, ButtonGroup, ImageListItem, ImageListItemBar } from "@mui/material";
+import {
+	Button,
+	ButtonGroup,
+	ImageListItem,
+	ImageListItemBar,
+} from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 export const ImageItem = (props: { name: string }) => {
 	const query = useQuery({
 		queryKey: ["ImageLibrarySingle", props.name],
 		queryFn: async () => {
-			return supabase.storage.from(import.meta.env.VITE_STORAGE).getPublicUrl(`public/${props.name}`, {
-				transform: {
-					width: 200,
-					height: 200,
-					quality: 30,
-				},
-			});
+			return supabase.storage
+				.from(import.meta.env.VITE_STORAGE)
+				.getPublicUrl(`public/${props.name}`, {
+					transform: {
+						width: 200,
+						height: 200,
+						quality: 30,
+					},
+				});
 		},
 	});
 	const oriImageQuery = useQuery({
 		queryKey: ["ImageLibrarySingleOri", props.name],
 		queryFn: async () => {
-			return supabase.storage.from(import.meta.env.VITE_STORAGE).getPublicUrl(`public/${props.name}`, {
-				transform: {
-					width: 800,
-					quality: 60,
-					resize: "contain",
-				},
-			});
+			return supabase.storage
+				.from(import.meta.env.VITE_STORAGE)
+				.getPublicUrl(`public/${props.name}`, {
+					transform: {
+						width: 800,
+						quality: 60,
+						resize: "contain",
+					},
+				});
 		},
 	});
 	const markdown_text = `![${props.name}](${oriImageQuery.data?.data.publicUrl})`;
@@ -33,7 +42,12 @@ export const ImageItem = (props: { name: string }) => {
 		<>
 			{props.name !== ".emptyFolderPlaceholder" && (
 				<ImageListItem sx={{ mb: 8 }}>
-					<img src={query.data?.data.publicUrl} alt={props.name} loading="lazy" style={{ maxWidth: "100%" }} />
+					<img
+						src={query.data?.data.publicUrl}
+						alt={props.name}
+						loading="lazy"
+						style={{ maxWidth: "100%" }}
+					/>
 					<ImageListItemBar
 						sx={{ mt: 2 }}
 						position="below"

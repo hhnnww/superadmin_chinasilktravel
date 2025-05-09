@@ -7,6 +7,7 @@ import { Button, ButtonGroup, Grid, ImageList, Stack } from "@mui/material";
 import { createFileRoute } from "@tanstack/react-router";
 import { ImageItem } from "./-image-item";
 import { UpdateImage } from "./-update-image";
+
 export const Route = createFileRoute("/admin/ImageLibrary/list/$num")({
 	component: RouteComponent,
 	loader: async ({ params }) => {
@@ -40,18 +41,29 @@ function RouteComponent() {
 			<Grid size={12}>
 				<Stack direction={"row"} spacing={1}>
 					{Number(params.num) > 1 && (
-						<CustomButtonLink to={"/admin/ImageLibrary/list/$num"} params={{ num: "1" }}>
+						<CustomButtonLink
+							to={"/admin/ImageLibrary/list/$num"}
+							params={{ num: "1" }}
+						>
 							Home
 						</CustomButtonLink>
 					)}
 					<ButtonGroup variant="contained">
 						{Number(params.num) > 1 && (
-							<CustomButtonLink startIcon={<KeyboardDoubleArrowLeftOutlinedIcon />} to={"/admin/ImageLibrary/list/$num"} params={{ num: (Number(params.num) - 1).toString() }}>
+							<CustomButtonLink
+								startIcon={<KeyboardDoubleArrowLeftOutlinedIcon />}
+								to={"/admin/ImageLibrary/list/$num"}
+								params={{ num: (Number(params.num) - 1).toString() }}
+							>
 								{Number(params.num) - 1} PrevPage
 							</CustomButtonLink>
 						)}
 						<Button>{params.num}</Button>
-						<CustomButtonLink endIcon={<KeyboardDoubleArrowRightOutlinedIcon />} to={"/admin/ImageLibrary/list/$num"} params={{ num: (Number(params.num) + 1).toString() }}>
+						<CustomButtonLink
+							endIcon={<KeyboardDoubleArrowRightOutlinedIcon />}
+							to={"/admin/ImageLibrary/list/$num"}
+							params={{ num: (Number(params.num) + 1).toString() }}
+						>
 							NextPage {Number(params.num) + 1}
 						</CustomButtonLink>
 					</ButtonGroup>

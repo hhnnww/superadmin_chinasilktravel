@@ -14,7 +14,9 @@ export const UpdateImage = () => {
 	});
 
 	const navigate = useNavigate();
-	const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileChange = async (
+		event: React.ChangeEvent<HTMLInputElement>,
+	) => {
 		const files = event.target.files;
 		if (!files || files.length === 0) return;
 		setOpen(true);
@@ -27,7 +29,9 @@ export const UpdateImage = () => {
 				draft.current += 1;
 			});
 			const uniqueFileNames = `${shortUUID().generate()}.jpg`;
-			await supabase.storage.from(import.meta.env.VITE_STORAGE).upload(`public/${uniqueFileNames}`, file);
+			await supabase.storage
+				.from(import.meta.env.VITE_STORAGE)
+				.upload(`public/${uniqueFileNames}`, file);
 		}
 		event.target.value = "";
 		setOpen(false);
@@ -42,7 +46,12 @@ export const UpdateImage = () => {
 					<LinearProgress />
 				</Box>
 			)}
-			<input type="file" accept="image/*" multiple onChange={handleFileChange} />
+			<input
+				type="file"
+				accept="image/*"
+				multiple
+				onChange={handleFileChange}
+			/>
 		</>
 	);
 };
