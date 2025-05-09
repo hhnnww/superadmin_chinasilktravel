@@ -10,8 +10,8 @@ import "@fontsource/montserrat/500.css";
 import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/800.css";
-
 import { theme } from "@/theme";
+import { Analytics } from "@vercel/analytics/react";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -20,6 +20,7 @@ interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	component: () => (
 		<>
+			<Analytics />
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<Outlet />
