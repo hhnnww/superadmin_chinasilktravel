@@ -15,7 +15,9 @@ import { Route as LoginImport } from './routes/login'
 import { Route as AdminRouteImport } from './routes/admin/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as AdminGoogleAdRouteImport } from './routes/admin/googleAd/route'
+import { Route as AdminPhotoLibraryRouteImport } from './routes/admin/PhotoLibrary/route'
 import { Route as AdminImageLibraryRouteImport } from './routes/admin/ImageLibrary/route'
+import { Route as AdminPhotoLibraryListImport } from './routes/admin/PhotoLibrary/list'
 import { Route as AdminGoogleAdSalerRouteImport } from './routes/admin/googleAd/saler/route'
 import { Route as AdminGoogleAdPageRouteImport } from './routes/admin/googleAd/page/route'
 import { Route as AdminImageLibraryListNumImport } from './routes/admin/ImageLibrary/list.$num'
@@ -50,10 +52,22 @@ const AdminGoogleAdRouteRoute = AdminGoogleAdRouteImport.update({
   getParentRoute: () => AdminRouteRoute,
 } as any)
 
+const AdminPhotoLibraryRouteRoute = AdminPhotoLibraryRouteImport.update({
+  id: '/PhotoLibrary',
+  path: '/PhotoLibrary',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+
 const AdminImageLibraryRouteRoute = AdminImageLibraryRouteImport.update({
   id: '/ImageLibrary',
   path: '/ImageLibrary',
   getParentRoute: () => AdminRouteRoute,
+} as any)
+
+const AdminPhotoLibraryListRoute = AdminPhotoLibraryListImport.update({
+  id: '/list',
+  path: '/list',
+  getParentRoute: () => AdminPhotoLibraryRouteRoute,
 } as any)
 
 const AdminGoogleAdSalerRouteRoute = AdminGoogleAdSalerRouteImport.update({
@@ -132,6 +146,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminImageLibraryRouteImport
       parentRoute: typeof AdminRouteImport
     }
+    '/admin/PhotoLibrary': {
+      id: '/admin/PhotoLibrary'
+      path: '/PhotoLibrary'
+      fullPath: '/admin/PhotoLibrary'
+      preLoaderRoute: typeof AdminPhotoLibraryRouteImport
+      parentRoute: typeof AdminRouteImport
+    }
     '/admin/googleAd': {
       id: '/admin/googleAd'
       path: '/googleAd'
@@ -152,6 +173,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/googleAd/saler'
       preLoaderRoute: typeof AdminGoogleAdSalerRouteImport
       parentRoute: typeof AdminGoogleAdRouteImport
+    }
+    '/admin/PhotoLibrary/list': {
+      id: '/admin/PhotoLibrary/list'
+      path: '/list'
+      fullPath: '/admin/PhotoLibrary/list'
+      preLoaderRoute: typeof AdminPhotoLibraryListImport
+      parentRoute: typeof AdminPhotoLibraryRouteImport
     }
     '/admin/ImageLibrary/list/$num': {
       id: '/admin/ImageLibrary/list/$num'
@@ -207,6 +235,20 @@ const AdminImageLibraryRouteRouteWithChildren =
     AdminImageLibraryRouteRouteChildren,
   )
 
+interface AdminPhotoLibraryRouteRouteChildren {
+  AdminPhotoLibraryListRoute: typeof AdminPhotoLibraryListRoute
+}
+
+const AdminPhotoLibraryRouteRouteChildren: AdminPhotoLibraryRouteRouteChildren =
+  {
+    AdminPhotoLibraryListRoute: AdminPhotoLibraryListRoute,
+  }
+
+const AdminPhotoLibraryRouteRouteWithChildren =
+  AdminPhotoLibraryRouteRoute._addFileChildren(
+    AdminPhotoLibraryRouteRouteChildren,
+  )
+
 interface AdminGoogleAdPageRouteRouteChildren {
   AdminGoogleAdPageEditIdRoute: typeof AdminGoogleAdPageEditIdRoute
   AdminGoogleAdPageListPageRoute: typeof AdminGoogleAdPageListPageRoute
@@ -254,11 +296,13 @@ const AdminGoogleAdRouteRouteWithChildren =
 
 interface AdminRouteRouteChildren {
   AdminImageLibraryRouteRoute: typeof AdminImageLibraryRouteRouteWithChildren
+  AdminPhotoLibraryRouteRoute: typeof AdminPhotoLibraryRouteRouteWithChildren
   AdminGoogleAdRouteRoute: typeof AdminGoogleAdRouteRouteWithChildren
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminImageLibraryRouteRoute: AdminImageLibraryRouteRouteWithChildren,
+  AdminPhotoLibraryRouteRoute: AdminPhotoLibraryRouteRouteWithChildren,
   AdminGoogleAdRouteRoute: AdminGoogleAdRouteRouteWithChildren,
 }
 
@@ -271,9 +315,11 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/ImageLibrary': typeof AdminImageLibraryRouteRouteWithChildren
+  '/admin/PhotoLibrary': typeof AdminPhotoLibraryRouteRouteWithChildren
   '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
   '/admin/googleAd/page': typeof AdminGoogleAdPageRouteRouteWithChildren
   '/admin/googleAd/saler': typeof AdminGoogleAdSalerRouteRouteWithChildren
+  '/admin/PhotoLibrary/list': typeof AdminPhotoLibraryListRoute
   '/admin/ImageLibrary/list/$num': typeof AdminImageLibraryListNumRoute
   '/admin/googleAd/page/edit/$id': typeof AdminGoogleAdPageEditIdRoute
   '/admin/googleAd/page/list/$page': typeof AdminGoogleAdPageListPageRoute
@@ -286,9 +332,11 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/ImageLibrary': typeof AdminImageLibraryRouteRouteWithChildren
+  '/admin/PhotoLibrary': typeof AdminPhotoLibraryRouteRouteWithChildren
   '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
   '/admin/googleAd/page': typeof AdminGoogleAdPageRouteRouteWithChildren
   '/admin/googleAd/saler': typeof AdminGoogleAdSalerRouteRouteWithChildren
+  '/admin/PhotoLibrary/list': typeof AdminPhotoLibraryListRoute
   '/admin/ImageLibrary/list/$num': typeof AdminImageLibraryListNumRoute
   '/admin/googleAd/page/edit/$id': typeof AdminGoogleAdPageEditIdRoute
   '/admin/googleAd/page/list/$page': typeof AdminGoogleAdPageListPageRoute
@@ -302,9 +350,11 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/ImageLibrary': typeof AdminImageLibraryRouteRouteWithChildren
+  '/admin/PhotoLibrary': typeof AdminPhotoLibraryRouteRouteWithChildren
   '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
   '/admin/googleAd/page': typeof AdminGoogleAdPageRouteRouteWithChildren
   '/admin/googleAd/saler': typeof AdminGoogleAdSalerRouteRouteWithChildren
+  '/admin/PhotoLibrary/list': typeof AdminPhotoLibraryListRoute
   '/admin/ImageLibrary/list/$num': typeof AdminImageLibraryListNumRoute
   '/admin/googleAd/page/edit/$id': typeof AdminGoogleAdPageEditIdRoute
   '/admin/googleAd/page/list/$page': typeof AdminGoogleAdPageListPageRoute
@@ -319,9 +369,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/login'
     | '/admin/ImageLibrary'
+    | '/admin/PhotoLibrary'
     | '/admin/googleAd'
     | '/admin/googleAd/page'
     | '/admin/googleAd/saler'
+    | '/admin/PhotoLibrary/list'
     | '/admin/ImageLibrary/list/$num'
     | '/admin/googleAd/page/edit/$id'
     | '/admin/googleAd/page/list/$page'
@@ -333,9 +385,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/login'
     | '/admin/ImageLibrary'
+    | '/admin/PhotoLibrary'
     | '/admin/googleAd'
     | '/admin/googleAd/page'
     | '/admin/googleAd/saler'
+    | '/admin/PhotoLibrary/list'
     | '/admin/ImageLibrary/list/$num'
     | '/admin/googleAd/page/edit/$id'
     | '/admin/googleAd/page/list/$page'
@@ -347,9 +401,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/login'
     | '/admin/ImageLibrary'
+    | '/admin/PhotoLibrary'
     | '/admin/googleAd'
     | '/admin/googleAd/page'
     | '/admin/googleAd/saler'
+    | '/admin/PhotoLibrary/list'
     | '/admin/ImageLibrary/list/$num'
     | '/admin/googleAd/page/edit/$id'
     | '/admin/googleAd/page/list/$page'
@@ -392,6 +448,7 @@ export const routeTree = rootRoute
       "filePath": "admin/route.tsx",
       "children": [
         "/admin/ImageLibrary",
+        "/admin/PhotoLibrary",
         "/admin/googleAd"
       ]
     },
@@ -403,6 +460,13 @@ export const routeTree = rootRoute
       "parent": "/admin",
       "children": [
         "/admin/ImageLibrary/list/$num"
+      ]
+    },
+    "/admin/PhotoLibrary": {
+      "filePath": "admin/PhotoLibrary/route.tsx",
+      "parent": "/admin",
+      "children": [
+        "/admin/PhotoLibrary/list"
       ]
     },
     "/admin/googleAd": {
@@ -428,6 +492,10 @@ export const routeTree = rootRoute
         "/admin/googleAd/saler/edit/$id",
         "/admin/googleAd/saler/list/$page"
       ]
+    },
+    "/admin/PhotoLibrary/list": {
+      "filePath": "admin/PhotoLibrary/list.tsx",
+      "parent": "/admin/PhotoLibrary"
     },
     "/admin/ImageLibrary/list/$num": {
       "filePath": "admin/ImageLibrary/list.$num.tsx",
