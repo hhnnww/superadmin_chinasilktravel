@@ -16,7 +16,13 @@ function RouteComponent() {
 	const query = useQuery({
 		queryKey: ["googleAdPageEdit"],
 		queryFn: async () => {
-			const page = (await supabase.from("googleAdPage").select("*").eq("id", Number(params.id)).single()).data;
+			const page = (
+				await supabase
+					.from("googleAdPage")
+					.select("*")
+					.eq("id", Number(params.id))
+					.single()
+			).data;
 			const comment_list = (
 				await supabase
 					.from("googleAdPage")
@@ -33,7 +39,13 @@ function RouteComponent() {
 			<PageTitle
 				title="Edit GoogleAdPage"
 				sub_header={
-					<CustomButtonLink color="inherit" variant="text" startIcon={<KeyboardBackspaceOutlinedIcon />} to={"/admin/googleAd/page/list/$page"} params={{ page: "1" }}>
+					<CustomButtonLink
+						color="inherit"
+						variant="text"
+						startIcon={<KeyboardBackspaceOutlinedIcon />}
+						to={"/admin/googleAd/page/list/$page"}
+						params={{ page: "1" }}
+					>
 						Back GoogleAdPage List
 					</CustomButtonLink>
 				}
@@ -46,7 +58,11 @@ function RouteComponent() {
 			)}
 
 			{query.data?.comment_list?.map((item, index) => (
-				<EditForm key={item.id.toString()} value={item} label={`Comment: ${String(index + 1).padStart(2, "0")}`} />
+				<EditForm
+					key={item.id.toString()}
+					value={item}
+					label={`Comment: ${String(index + 1).padStart(2, "0")}`}
+				/>
 			))}
 
 			<Grid size={12}>
@@ -68,7 +84,12 @@ const NewCommentButton = (props: { parnet_id: number }) => {
 		},
 	});
 	return (
-		<Button disabled={mutation.isPending} fullWidth size={"large"} onClick={async () => await mutation.mutateAsync()}>
+		<Button
+			disabled={mutation.isPending}
+			fullWidth
+			size={"large"}
+			onClick={async () => await mutation.mutateAsync()}
+		>
 			Add New Comment
 		</Button>
 	);

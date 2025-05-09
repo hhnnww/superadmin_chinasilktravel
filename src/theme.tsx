@@ -17,9 +17,9 @@ export const theme = createTheme({
 		dark: {
 			palette: {
 				mode: "dark",
-				primary: {
-					main: "rgb(41, 112, 255);",
-				},
+				// primary: {
+				// 	main: "rgb(41, 112, 255);",
+				// },
 			},
 		},
 	},

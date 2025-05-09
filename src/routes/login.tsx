@@ -41,7 +41,12 @@ function RouteComponent() {
 	});
 
 	return (
-		<Stack width={"100vw"} height={"100vh"} justifyContent="center" alignItems="center">
+		<Stack
+			width={"100vw"}
+			height={"100vh"}
+			justifyContent="center"
+			alignItems="center"
+		>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
@@ -50,10 +55,22 @@ function RouteComponent() {
 				}}
 			>
 				<Stack spacing={2} alignItems={"start"} sx={{ width: "450px" }}>
-					<form.AppField name="email">{(field) => <field.TextField autoComplete="off" />}</form.AppField>
-					<form.AppField name="password">{(field) => <field.TextField type="password" autoComplete="off" />}</form.AppField>
+					<form.AppField name="email">
+						{(field) => <field.TextField autoComplete="off" />}
+					</form.AppField>
+					<form.AppField name="password">
+						{(field) => <field.TextField type="password" autoComplete="off" />}
+					</form.AppField>
 					<form.AppForm>
-						<form.Subscribe selector={(state) => [state.isSubmitting, state.canSubmit]}>{([isSubmitting, canSubmit]) => <form.SubscribeButton disabled={isSubmitting || !canSubmit}>login</form.SubscribeButton>}</form.Subscribe>
+						<form.Subscribe
+							selector={(state) => [state.isSubmitting, state.canSubmit]}
+						>
+							{([isSubmitting, canSubmit]) => (
+								<form.SubscribeButton disabled={isSubmitting || !canSubmit}>
+									login
+								</form.SubscribeButton>
+							)}
+						</form.Subscribe>
 					</form.AppForm>
 				</Stack>
 			</form>

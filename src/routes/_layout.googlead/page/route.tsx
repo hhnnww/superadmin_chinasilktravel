@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/admin/ImageLibrary")({
+export const Route = createFileRoute("/_layout/googlead/page")({
 	component: RouteComponent,
 });
 

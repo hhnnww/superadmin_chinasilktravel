@@ -34,7 +34,6 @@ export const AdminSidebar = () => {
 				},
 			],
 		},
-
 		{
 			title: "PhotoLibrary",
 			menus: [
@@ -49,7 +48,9 @@ export const AdminSidebar = () => {
 			],
 		},
 	];
+
 	const theme = useTheme();
+
 	return (
 		<Box my={2}>
 			{sidebar_menus.map((menu) => (
