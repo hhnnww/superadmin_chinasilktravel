@@ -1,7 +1,7 @@
 import { supabaseStroga } from "@/supabase";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { Box, Button, LinearProgress, Typography } from "@mui/material";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { customAlphabet } from "nanoid";
 import { lowercase } from "nanoid-dictionary";
 import { numbers } from "nanoid-dictionary";
@@ -13,6 +13,8 @@ export const UpItem = () => {
 		total: 0,
 		name: "",
 	});
+
+	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
 		mutationFn: async (files: FileList | null) => {
@@ -36,6 +38,10 @@ export const UpItem = () => {
 				draft.current = 0;
 				draft.name = "";
 			});
+		},
+
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["images", 1] });
 		},
 	});
 
