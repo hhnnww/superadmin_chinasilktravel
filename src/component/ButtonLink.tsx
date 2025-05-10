@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
 import type { ButtonProps } from "@mui/material";
-import { createLink } from "@tanstack/react-router";
+import { Button } from "@mui/material";
 import type { LinkComponent } from "@tanstack/react-router";
+import { createLink } from "@tanstack/react-router";
 import React from "react";
 
 interface MUIButtonLinkProps extends ButtonProps<"a"> {}

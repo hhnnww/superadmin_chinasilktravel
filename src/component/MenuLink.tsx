@@ -1,7 +1,7 @@
-import { MenuItem } from "@mui/material";
 import type { MenuItemProps } from "@mui/material";
-import { createLink } from "@tanstack/react-router";
+import { MenuItem } from "@mui/material";
 import type { LinkComponent } from "@tanstack/react-router";
+import { createLink } from "@tanstack/react-router";
 import React from "react";
 
 interface MUIButtonLinkProps extends MenuItemProps<"a"> {}

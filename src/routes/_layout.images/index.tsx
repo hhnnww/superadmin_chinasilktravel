@@ -1,14 +1,18 @@
-import { PageTitle } from "@/component/PageTitle";
-import { supabaseStroga } from "@/supabase";
-import HomeMiniOutlinedIcon from "@mui/icons-material/HomeMiniOutlined";
-import KeyboardDoubleArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftOutlined";
-import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 import { Button, ButtonGroup, Grid } from "@mui/material";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+
+import HomeMiniOutlinedIcon from "@mui/icons-material/HomeMiniOutlined";
+import KeyboardDoubleArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftOutlined";
+import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
+
+import { PageTitle } from "@/component/PageTitle";
+import { supabaseStroga } from "@/supabase";
+
 import { PhotoItem } from "./-photo-item";
 import { UpItem } from "./-up-item";
+
 export const Route = createFileRoute("/_layout/images/")({
 	component: RouteComponent,
 });

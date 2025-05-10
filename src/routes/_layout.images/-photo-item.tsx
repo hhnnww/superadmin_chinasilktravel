@@ -1,8 +1,10 @@
-import { supabaseStroga } from "@/supabase";
-import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
-import BookmarkRemoveOutlinedIcon from "@mui/icons-material/BookmarkRemoveOutlined";
 import { Button, Grid, Paper, Stack } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
+import BookmarkRemoveOutlinedIcon from "@mui/icons-material/BookmarkRemoveOutlined";
+
+import { supabaseStroga } from "@/supabase";
 
 export const PhotoItem = (props: { name: string }) => {
 	// 获取缩略图

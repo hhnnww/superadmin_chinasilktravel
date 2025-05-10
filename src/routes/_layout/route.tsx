@@ -1,6 +1,8 @@
-import { supabaseClient } from "@/supabase";
 import { Container, Divider, Grid, Stack } from "@mui/material";
-import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute,Outlet } from "@tanstack/react-router";
+
+import { supabaseClient } from "@/supabase";
+
 import { Header } from "./-header";
 import { LayoutSidebar } from "./-sidebar";
 
