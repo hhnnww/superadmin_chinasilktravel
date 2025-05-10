@@ -6,10 +6,15 @@ import React from "react";
 
 interface MUIButtonLinkProps extends MenuItemProps<"a"> {}
 
-const MUIButtonLinkComponent = React.forwardRef<HTMLAnchorElement, MUIButtonLinkProps>((props, ref) => <MenuItem ref={ref} component="a" {...props} />);
+const MUIButtonLinkComponent = React.forwardRef<
+	HTMLAnchorElement,
+	MUIButtonLinkProps
+>((props, ref) => <MenuItem ref={ref} component="a" {...props} />);
 
 const CreatedButtonLinkComponent = createLink(MUIButtonLinkComponent);
 
-export const CustomMenuItemLink: LinkComponent<typeof MUIButtonLinkComponent> = (props) => {
+export const CustomMenuItemLink: LinkComponent<
+	typeof MUIButtonLinkComponent
+> = (props) => {
 	return <CreatedButtonLinkComponent preload={"intent"} {...props} />;
 };

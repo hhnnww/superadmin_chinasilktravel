@@ -1,7 +1,17 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from "@mui/material";
 import type { ReactNode } from "@tanstack/react-router";
 
-export const CustomTable = (props: { header: string[]; body: (string | ReactNode | null)[][] }) => {
+export const CustomTable = (props: {
+	header: string[];
+	body: (string | ReactNode | null)[][];
+}) => {
 	return (
 		<TableContainer>
 			<Table>

@@ -12,18 +12,9 @@ export const theme = createTheme({
 		fontWeightMedium: 600,
 		fontWeightBold: 700,
 	},
-
-	colorSchemes: {
-		dark: {
-			palette: {
-				mode: "dark",
-				// primary: {
-				// 	main: "rgb(41, 112, 255);",
-				// },
-			},
-		},
+	palette: {
+		mode: "dark",
 	},
-
 	components: {
 		MuiTextField: {
 			defaultProps: {
@@ -31,19 +22,15 @@ export const theme = createTheme({
 				fullWidth: true,
 			},
 		},
+
 		MuiButton: {
 			defaultProps: {
 				variant: "contained",
 				color: "primary",
 				disableElevation: true,
 			},
-			styleOverrides: {
-				root: {
-					textTransform: "none",
-					borderRadius: "12px",
-				},
-			},
 		},
+
 		MuiFilledInput: {
 			styleOverrides: {
 				root: ({ theme }) => ({

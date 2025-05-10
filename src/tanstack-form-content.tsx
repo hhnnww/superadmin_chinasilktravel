@@ -1,42 +1,49 @@
-import { Button, TextField as MuiTextField } from "@mui/material";
+import { Button, Grid, TextField as MuiTextField } from "@mui/material";
 import type { TextFieldProps } from "@mui/material";
 import type { ButtonProps } from "@mui/material/Button";
 import { createFormHookContexts } from "@tanstack/react-form";
 import { createFormHook } from "@tanstack/react-form";
 import type { ReactNode } from "@tanstack/react-router";
 
-const { fieldContext, useFieldContext, formContext, useFormContext } = createFormHookContexts();
+const { fieldContext, useFieldContext, formContext, useFormContext } =
+	createFormHookContexts();
 
-const TextField = (props: TextFieldProps) => {
+const TextField = (props: {
+	text_field_props?: TextFieldProps;
+	size?: number;
+}) => {
 	const field = useFieldContext();
 	return (
-		<MuiTextField
-			{...props}
-			label={field.name}
-			name={field.name}
-			value={field.state.value || ""}
-			onBlur={() => field.handleBlur()}
-			error={!field.state.meta.isValid}
-			onChange={(e) => field.handleChange(e.target.value)}
-			helperText={field.state.meta.errors.map((item) => item.message).join("")}
-			type={props?.type ? props.type : "text"}
-			autoComplete="off"
-			fullWidth
-		/>
+		<Grid size={props?.size ? props.size : 12}>
+			<MuiTextField
+				{...props.text_field_props}
+				label={field.name}
+				name={field.name}
+				value={field.state.value || ""}
+				onBlur={() => field.handleBlur()}
+				error={!field.state.meta.isValid}
+				onChange={(e) => field.handleChange(e.target.value)}
+				helperText={field.state.meta.errors
+					.map((item) => item.message)
+					.join("")}
+				autoComplete="off"
+				fullWidth
+			/>
+		</Grid>
 	);
 };
 
 function SubscribeButton(props: ButtonProps & { children: ReactNode }) {
 	const form = useFormContext();
 	return (
-		<form.Subscribe>
-			{() => (
+		<form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+			{([canSubmit, isSubmitting]) => (
 				<Button
 					{...props}
 					onClick={async () => {
 						await form.handleSubmit();
 					}}
-					disabled={form.state.isSubmitting || !form.state.canSubmit}
+					loading={!canSubmit || isSubmitting}
 				>
 					{props.children}
 				</Button>

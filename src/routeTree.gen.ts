@@ -11,363 +11,296 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as LoginImport } from './routes/login'
-import { Route as AdminRouteImport } from './routes/admin/route'
-import { Route as IndexImport } from './routes/index'
-import { Route as AdminGoogleAdRouteImport } from './routes/admin/googleAd/route'
-import { Route as AdminPhotoLibraryRouteImport } from './routes/admin/PhotoLibrary/route'
-import { Route as AdminPhotoLibraryListImport } from './routes/admin/PhotoLibrary/list'
-import { Route as AdminGoogleAdSalerRouteImport } from './routes/admin/googleAd/saler/route'
-import { Route as AdminGoogleAdPageRouteImport } from './routes/admin/googleAd/page/route'
-import { Route as AdminGoogleAdSalerListPageImport } from './routes/admin/googleAd/saler/list.$page'
-import { Route as AdminGoogleAdSalerEditIdImport } from './routes/admin/googleAd/saler/edit.$id'
-import { Route as AdminGoogleAdPageListPageImport } from './routes/admin/googleAd/page/list.$page'
-import { Route as AdminGoogleAdPageEditIdImport } from './routes/admin/googleAd/page/edit.$id'
+import { Route as LoginRouteImport } from './routes/login/route'
+import { Route as LayoutRouteImport } from './routes/_layout/route'
+import { Route as LayoutIndexRouteImport } from './routes/_layout.index/route'
+import { Route as LayoutImagesIndexImport } from './routes/_layout.images/index'
+import { Route as LayoutTravelProductsIndexImport } from './routes/_layout.travel/products/index'
+import { Route as LayoutTravelCityIndexImport } from './routes/_layout.travel/city/index'
+import { Route as LayoutGoogleadpageSalerIndexImport } from './routes/_layout.google_ad_page/saler/index'
+import { Route as LayoutGoogleadpagePageIndexImport } from './routes/_layout.google_ad_page/page/index'
+import { Route as LayoutTravelProductsEditIdImport } from './routes/_layout.travel/products/edit.$id'
+import { Route as LayoutTravelCityEditIdImport } from './routes/_layout.travel/city/edit.$id'
+import { Route as LayoutGoogleadpagePageEditIdImport } from './routes/_layout.google_ad_page/page/edit.$id'
 
 // Create/Update Routes
 
-const LoginRoute = LoginImport.update({
+const LoginRouteRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AdminRouteRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const LayoutRouteRoute = LayoutRouteImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const LayoutIndexRouteRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => LayoutRouteRoute,
 } as any)
 
-const AdminGoogleAdRouteRoute = AdminGoogleAdRouteImport.update({
-  id: '/googleAd',
-  path: '/googleAd',
-  getParentRoute: () => AdminRouteRoute,
+const LayoutImagesIndexRoute = LayoutImagesIndexImport.update({
+  id: '/images/',
+  path: '/images/',
+  getParentRoute: () => LayoutRouteRoute,
 } as any)
 
-const AdminPhotoLibraryRouteRoute = AdminPhotoLibraryRouteImport.update({
-  id: '/PhotoLibrary',
-  path: '/PhotoLibrary',
-  getParentRoute: () => AdminRouteRoute,
+const LayoutTravelProductsIndexRoute = LayoutTravelProductsIndexImport.update({
+  id: '/travel/products/',
+  path: '/travel/products/',
+  getParentRoute: () => LayoutRouteRoute,
 } as any)
 
-const AdminPhotoLibraryListRoute = AdminPhotoLibraryListImport.update({
-  id: '/list',
-  path: '/list',
-  getParentRoute: () => AdminPhotoLibraryRouteRoute,
+const LayoutTravelCityIndexRoute = LayoutTravelCityIndexImport.update({
+  id: '/travel/city/',
+  path: '/travel/city/',
+  getParentRoute: () => LayoutRouteRoute,
 } as any)
 
-const AdminGoogleAdSalerRouteRoute = AdminGoogleAdSalerRouteImport.update({
-  id: '/saler',
-  path: '/saler',
-  getParentRoute: () => AdminGoogleAdRouteRoute,
-} as any)
+const LayoutGoogleadpageSalerIndexRoute =
+  LayoutGoogleadpageSalerIndexImport.update({
+    id: '/google_ad_page/saler/',
+    path: '/google_ad_page/saler/',
+    getParentRoute: () => LayoutRouteRoute,
+  } as any)
 
-const AdminGoogleAdPageRouteRoute = AdminGoogleAdPageRouteImport.update({
-  id: '/page',
-  path: '/page',
-  getParentRoute: () => AdminGoogleAdRouteRoute,
-} as any)
+const LayoutGoogleadpagePageIndexRoute =
+  LayoutGoogleadpagePageIndexImport.update({
+    id: '/google_ad_page/page/',
+    path: '/google_ad_page/page/',
+    getParentRoute: () => LayoutRouteRoute,
+  } as any)
 
-const AdminGoogleAdSalerListPageRoute = AdminGoogleAdSalerListPageImport.update(
+const LayoutTravelProductsEditIdRoute = LayoutTravelProductsEditIdImport.update(
   {
-    id: '/list/$page',
-    path: '/list/$page',
-    getParentRoute: () => AdminGoogleAdSalerRouteRoute,
+    id: '/travel/products/edit/$id',
+    path: '/travel/products/edit/$id',
+    getParentRoute: () => LayoutRouteRoute,
   } as any,
 )
 
-const AdminGoogleAdSalerEditIdRoute = AdminGoogleAdSalerEditIdImport.update({
-  id: '/edit/$id',
-  path: '/edit/$id',
-  getParentRoute: () => AdminGoogleAdSalerRouteRoute,
+const LayoutTravelCityEditIdRoute = LayoutTravelCityEditIdImport.update({
+  id: '/travel/city/edit/$id',
+  path: '/travel/city/edit/$id',
+  getParentRoute: () => LayoutRouteRoute,
 } as any)
 
-const AdminGoogleAdPageListPageRoute = AdminGoogleAdPageListPageImport.update({
-  id: '/list/$page',
-  path: '/list/$page',
-  getParentRoute: () => AdminGoogleAdPageRouteRoute,
-} as any)
-
-const AdminGoogleAdPageEditIdRoute = AdminGoogleAdPageEditIdImport.update({
-  id: '/edit/$id',
-  path: '/edit/$id',
-  getParentRoute: () => AdminGoogleAdPageRouteRoute,
-} as any)
+const LayoutGoogleadpagePageEditIdRoute =
+  LayoutGoogleadpagePageEditIdImport.update({
+    id: '/google_ad_page/page/edit/$id',
+    path: '/google_ad_page/page/edit/$id',
+    getParentRoute: () => LayoutRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRoute
     }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRoute
     }
-    '/admin/PhotoLibrary': {
-      id: '/admin/PhotoLibrary'
-      path: '/PhotoLibrary'
-      fullPath: '/admin/PhotoLibrary'
-      preLoaderRoute: typeof AdminPhotoLibraryRouteImport
-      parentRoute: typeof AdminRouteImport
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexRouteImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd': {
-      id: '/admin/googleAd'
-      path: '/googleAd'
-      fullPath: '/admin/googleAd'
-      preLoaderRoute: typeof AdminGoogleAdRouteImport
-      parentRoute: typeof AdminRouteImport
+    '/_layout/images/': {
+      id: '/_layout/images/'
+      path: '/images'
+      fullPath: '/images'
+      preLoaderRoute: typeof LayoutImagesIndexImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd/page': {
-      id: '/admin/googleAd/page'
-      path: '/page'
-      fullPath: '/admin/googleAd/page'
-      preLoaderRoute: typeof AdminGoogleAdPageRouteImport
-      parentRoute: typeof AdminGoogleAdRouteImport
+    '/_layout/google_ad_page/page/': {
+      id: '/_layout/google_ad_page/page/'
+      path: '/google_ad_page/page'
+      fullPath: '/google_ad_page/page'
+      preLoaderRoute: typeof LayoutGoogleadpagePageIndexImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd/saler': {
-      id: '/admin/googleAd/saler'
-      path: '/saler'
-      fullPath: '/admin/googleAd/saler'
-      preLoaderRoute: typeof AdminGoogleAdSalerRouteImport
-      parentRoute: typeof AdminGoogleAdRouteImport
+    '/_layout/google_ad_page/saler/': {
+      id: '/_layout/google_ad_page/saler/'
+      path: '/google_ad_page/saler'
+      fullPath: '/google_ad_page/saler'
+      preLoaderRoute: typeof LayoutGoogleadpageSalerIndexImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/PhotoLibrary/list': {
-      id: '/admin/PhotoLibrary/list'
-      path: '/list'
-      fullPath: '/admin/PhotoLibrary/list'
-      preLoaderRoute: typeof AdminPhotoLibraryListImport
-      parentRoute: typeof AdminPhotoLibraryRouteImport
+    '/_layout/travel/city/': {
+      id: '/_layout/travel/city/'
+      path: '/travel/city'
+      fullPath: '/travel/city'
+      preLoaderRoute: typeof LayoutTravelCityIndexImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd/page/edit/$id': {
-      id: '/admin/googleAd/page/edit/$id'
-      path: '/edit/$id'
-      fullPath: '/admin/googleAd/page/edit/$id'
-      preLoaderRoute: typeof AdminGoogleAdPageEditIdImport
-      parentRoute: typeof AdminGoogleAdPageRouteImport
+    '/_layout/travel/products/': {
+      id: '/_layout/travel/products/'
+      path: '/travel/products'
+      fullPath: '/travel/products'
+      preLoaderRoute: typeof LayoutTravelProductsIndexImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd/page/list/$page': {
-      id: '/admin/googleAd/page/list/$page'
-      path: '/list/$page'
-      fullPath: '/admin/googleAd/page/list/$page'
-      preLoaderRoute: typeof AdminGoogleAdPageListPageImport
-      parentRoute: typeof AdminGoogleAdPageRouteImport
+    '/_layout/google_ad_page/page/edit/$id': {
+      id: '/_layout/google_ad_page/page/edit/$id'
+      path: '/google_ad_page/page/edit/$id'
+      fullPath: '/google_ad_page/page/edit/$id'
+      preLoaderRoute: typeof LayoutGoogleadpagePageEditIdImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd/saler/edit/$id': {
-      id: '/admin/googleAd/saler/edit/$id'
-      path: '/edit/$id'
-      fullPath: '/admin/googleAd/saler/edit/$id'
-      preLoaderRoute: typeof AdminGoogleAdSalerEditIdImport
-      parentRoute: typeof AdminGoogleAdSalerRouteImport
+    '/_layout/travel/city/edit/$id': {
+      id: '/_layout/travel/city/edit/$id'
+      path: '/travel/city/edit/$id'
+      fullPath: '/travel/city/edit/$id'
+      preLoaderRoute: typeof LayoutTravelCityEditIdImport
+      parentRoute: typeof LayoutRouteImport
     }
-    '/admin/googleAd/saler/list/$page': {
-      id: '/admin/googleAd/saler/list/$page'
-      path: '/list/$page'
-      fullPath: '/admin/googleAd/saler/list/$page'
-      preLoaderRoute: typeof AdminGoogleAdSalerListPageImport
-      parentRoute: typeof AdminGoogleAdSalerRouteImport
+    '/_layout/travel/products/edit/$id': {
+      id: '/_layout/travel/products/edit/$id'
+      path: '/travel/products/edit/$id'
+      fullPath: '/travel/products/edit/$id'
+      preLoaderRoute: typeof LayoutTravelProductsEditIdImport
+      parentRoute: typeof LayoutRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface AdminPhotoLibraryRouteRouteChildren {
-  AdminPhotoLibraryListRoute: typeof AdminPhotoLibraryListRoute
+interface LayoutRouteRouteChildren {
+  LayoutIndexRouteRoute: typeof LayoutIndexRouteRoute
+  LayoutImagesIndexRoute: typeof LayoutImagesIndexRoute
+  LayoutGoogleadpagePageIndexRoute: typeof LayoutGoogleadpagePageIndexRoute
+  LayoutGoogleadpageSalerIndexRoute: typeof LayoutGoogleadpageSalerIndexRoute
+  LayoutTravelCityIndexRoute: typeof LayoutTravelCityIndexRoute
+  LayoutTravelProductsIndexRoute: typeof LayoutTravelProductsIndexRoute
+  LayoutGoogleadpagePageEditIdRoute: typeof LayoutGoogleadpagePageEditIdRoute
+  LayoutTravelCityEditIdRoute: typeof LayoutTravelCityEditIdRoute
+  LayoutTravelProductsEditIdRoute: typeof LayoutTravelProductsEditIdRoute
 }
 
-const AdminPhotoLibraryRouteRouteChildren: AdminPhotoLibraryRouteRouteChildren =
-  {
-    AdminPhotoLibraryListRoute: AdminPhotoLibraryListRoute,
-  }
-
-const AdminPhotoLibraryRouteRouteWithChildren =
-  AdminPhotoLibraryRouteRoute._addFileChildren(
-    AdminPhotoLibraryRouteRouteChildren,
-  )
-
-interface AdminGoogleAdPageRouteRouteChildren {
-  AdminGoogleAdPageEditIdRoute: typeof AdminGoogleAdPageEditIdRoute
-  AdminGoogleAdPageListPageRoute: typeof AdminGoogleAdPageListPageRoute
+const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
+  LayoutIndexRouteRoute: LayoutIndexRouteRoute,
+  LayoutImagesIndexRoute: LayoutImagesIndexRoute,
+  LayoutGoogleadpagePageIndexRoute: LayoutGoogleadpagePageIndexRoute,
+  LayoutGoogleadpageSalerIndexRoute: LayoutGoogleadpageSalerIndexRoute,
+  LayoutTravelCityIndexRoute: LayoutTravelCityIndexRoute,
+  LayoutTravelProductsIndexRoute: LayoutTravelProductsIndexRoute,
+  LayoutGoogleadpagePageEditIdRoute: LayoutGoogleadpagePageEditIdRoute,
+  LayoutTravelCityEditIdRoute: LayoutTravelCityEditIdRoute,
+  LayoutTravelProductsEditIdRoute: LayoutTravelProductsEditIdRoute,
 }
 
-const AdminGoogleAdPageRouteRouteChildren: AdminGoogleAdPageRouteRouteChildren =
-  {
-    AdminGoogleAdPageEditIdRoute: AdminGoogleAdPageEditIdRoute,
-    AdminGoogleAdPageListPageRoute: AdminGoogleAdPageListPageRoute,
-  }
-
-const AdminGoogleAdPageRouteRouteWithChildren =
-  AdminGoogleAdPageRouteRoute._addFileChildren(
-    AdminGoogleAdPageRouteRouteChildren,
-  )
-
-interface AdminGoogleAdSalerRouteRouteChildren {
-  AdminGoogleAdSalerEditIdRoute: typeof AdminGoogleAdSalerEditIdRoute
-  AdminGoogleAdSalerListPageRoute: typeof AdminGoogleAdSalerListPageRoute
-}
-
-const AdminGoogleAdSalerRouteRouteChildren: AdminGoogleAdSalerRouteRouteChildren =
-  {
-    AdminGoogleAdSalerEditIdRoute: AdminGoogleAdSalerEditIdRoute,
-    AdminGoogleAdSalerListPageRoute: AdminGoogleAdSalerListPageRoute,
-  }
-
-const AdminGoogleAdSalerRouteRouteWithChildren =
-  AdminGoogleAdSalerRouteRoute._addFileChildren(
-    AdminGoogleAdSalerRouteRouteChildren,
-  )
-
-interface AdminGoogleAdRouteRouteChildren {
-  AdminGoogleAdPageRouteRoute: typeof AdminGoogleAdPageRouteRouteWithChildren
-  AdminGoogleAdSalerRouteRoute: typeof AdminGoogleAdSalerRouteRouteWithChildren
-}
-
-const AdminGoogleAdRouteRouteChildren: AdminGoogleAdRouteRouteChildren = {
-  AdminGoogleAdPageRouteRoute: AdminGoogleAdPageRouteRouteWithChildren,
-  AdminGoogleAdSalerRouteRoute: AdminGoogleAdSalerRouteRouteWithChildren,
-}
-
-const AdminGoogleAdRouteRouteWithChildren =
-  AdminGoogleAdRouteRoute._addFileChildren(AdminGoogleAdRouteRouteChildren)
-
-interface AdminRouteRouteChildren {
-  AdminPhotoLibraryRouteRoute: typeof AdminPhotoLibraryRouteRouteWithChildren
-  AdminGoogleAdRouteRoute: typeof AdminGoogleAdRouteRouteWithChildren
-}
-
-const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminPhotoLibraryRouteRoute: AdminPhotoLibraryRouteRouteWithChildren,
-  AdminGoogleAdRouteRoute: AdminGoogleAdRouteRouteWithChildren,
-}
-
-const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
-  AdminRouteRouteChildren,
+const LayoutRouteRouteWithChildren = LayoutRouteRoute._addFileChildren(
+  LayoutRouteRouteChildren,
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/admin/PhotoLibrary': typeof AdminPhotoLibraryRouteRouteWithChildren
-  '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
-  '/admin/googleAd/page': typeof AdminGoogleAdPageRouteRouteWithChildren
-  '/admin/googleAd/saler': typeof AdminGoogleAdSalerRouteRouteWithChildren
-  '/admin/PhotoLibrary/list': typeof AdminPhotoLibraryListRoute
-  '/admin/googleAd/page/edit/$id': typeof AdminGoogleAdPageEditIdRoute
-  '/admin/googleAd/page/list/$page': typeof AdminGoogleAdPageListPageRoute
-  '/admin/googleAd/saler/edit/$id': typeof AdminGoogleAdSalerEditIdRoute
-  '/admin/googleAd/saler/list/$page': typeof AdminGoogleAdSalerListPageRoute
+  '': typeof LayoutRouteRouteWithChildren
+  '/login': typeof LoginRouteRoute
+  '/': typeof LayoutIndexRouteRoute
+  '/images': typeof LayoutImagesIndexRoute
+  '/google_ad_page/page': typeof LayoutGoogleadpagePageIndexRoute
+  '/google_ad_page/saler': typeof LayoutGoogleadpageSalerIndexRoute
+  '/travel/city': typeof LayoutTravelCityIndexRoute
+  '/travel/products': typeof LayoutTravelProductsIndexRoute
+  '/google_ad_page/page/edit/$id': typeof LayoutGoogleadpagePageEditIdRoute
+  '/travel/city/edit/$id': typeof LayoutTravelCityEditIdRoute
+  '/travel/products/edit/$id': typeof LayoutTravelProductsEditIdRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/admin/PhotoLibrary': typeof AdminPhotoLibraryRouteRouteWithChildren
-  '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
-  '/admin/googleAd/page': typeof AdminGoogleAdPageRouteRouteWithChildren
-  '/admin/googleAd/saler': typeof AdminGoogleAdSalerRouteRouteWithChildren
-  '/admin/PhotoLibrary/list': typeof AdminPhotoLibraryListRoute
-  '/admin/googleAd/page/edit/$id': typeof AdminGoogleAdPageEditIdRoute
-  '/admin/googleAd/page/list/$page': typeof AdminGoogleAdPageListPageRoute
-  '/admin/googleAd/saler/edit/$id': typeof AdminGoogleAdSalerEditIdRoute
-  '/admin/googleAd/saler/list/$page': typeof AdminGoogleAdSalerListPageRoute
+  '/login': typeof LoginRouteRoute
+  '/': typeof LayoutIndexRouteRoute
+  '/images': typeof LayoutImagesIndexRoute
+  '/google_ad_page/page': typeof LayoutGoogleadpagePageIndexRoute
+  '/google_ad_page/saler': typeof LayoutGoogleadpageSalerIndexRoute
+  '/travel/city': typeof LayoutTravelCityIndexRoute
+  '/travel/products': typeof LayoutTravelProductsIndexRoute
+  '/google_ad_page/page/edit/$id': typeof LayoutGoogleadpagePageEditIdRoute
+  '/travel/city/edit/$id': typeof LayoutTravelCityEditIdRoute
+  '/travel/products/edit/$id': typeof LayoutTravelProductsEditIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/admin/PhotoLibrary': typeof AdminPhotoLibraryRouteRouteWithChildren
-  '/admin/googleAd': typeof AdminGoogleAdRouteRouteWithChildren
-  '/admin/googleAd/page': typeof AdminGoogleAdPageRouteRouteWithChildren
-  '/admin/googleAd/saler': typeof AdminGoogleAdSalerRouteRouteWithChildren
-  '/admin/PhotoLibrary/list': typeof AdminPhotoLibraryListRoute
-  '/admin/googleAd/page/edit/$id': typeof AdminGoogleAdPageEditIdRoute
-  '/admin/googleAd/page/list/$page': typeof AdminGoogleAdPageListPageRoute
-  '/admin/googleAd/saler/edit/$id': typeof AdminGoogleAdSalerEditIdRoute
-  '/admin/googleAd/saler/list/$page': typeof AdminGoogleAdSalerListPageRoute
+  '/_layout': typeof LayoutRouteRouteWithChildren
+  '/login': typeof LoginRouteRoute
+  '/_layout/': typeof LayoutIndexRouteRoute
+  '/_layout/images/': typeof LayoutImagesIndexRoute
+  '/_layout/google_ad_page/page/': typeof LayoutGoogleadpagePageIndexRoute
+  '/_layout/google_ad_page/saler/': typeof LayoutGoogleadpageSalerIndexRoute
+  '/_layout/travel/city/': typeof LayoutTravelCityIndexRoute
+  '/_layout/travel/products/': typeof LayoutTravelProductsIndexRoute
+  '/_layout/google_ad_page/page/edit/$id': typeof LayoutGoogleadpagePageEditIdRoute
+  '/_layout/travel/city/edit/$id': typeof LayoutTravelCityEditIdRoute
+  '/_layout/travel/products/edit/$id': typeof LayoutTravelProductsEditIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/admin'
+    | ''
     | '/login'
-    | '/admin/PhotoLibrary'
-    | '/admin/googleAd'
-    | '/admin/googleAd/page'
-    | '/admin/googleAd/saler'
-    | '/admin/PhotoLibrary/list'
-    | '/admin/googleAd/page/edit/$id'
-    | '/admin/googleAd/page/list/$page'
-    | '/admin/googleAd/saler/edit/$id'
-    | '/admin/googleAd/saler/list/$page'
+    | '/'
+    | '/images'
+    | '/google_ad_page/page'
+    | '/google_ad_page/saler'
+    | '/travel/city'
+    | '/travel/products'
+    | '/google_ad_page/page/edit/$id'
+    | '/travel/city/edit/$id'
+    | '/travel/products/edit/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/admin'
     | '/login'
-    | '/admin/PhotoLibrary'
-    | '/admin/googleAd'
-    | '/admin/googleAd/page'
-    | '/admin/googleAd/saler'
-    | '/admin/PhotoLibrary/list'
-    | '/admin/googleAd/page/edit/$id'
-    | '/admin/googleAd/page/list/$page'
-    | '/admin/googleAd/saler/edit/$id'
-    | '/admin/googleAd/saler/list/$page'
+    | '/'
+    | '/images'
+    | '/google_ad_page/page'
+    | '/google_ad_page/saler'
+    | '/travel/city'
+    | '/travel/products'
+    | '/google_ad_page/page/edit/$id'
+    | '/travel/city/edit/$id'
+    | '/travel/products/edit/$id'
   id:
     | '__root__'
-    | '/'
-    | '/admin'
+    | '/_layout'
     | '/login'
-    | '/admin/PhotoLibrary'
-    | '/admin/googleAd'
-    | '/admin/googleAd/page'
-    | '/admin/googleAd/saler'
-    | '/admin/PhotoLibrary/list'
-    | '/admin/googleAd/page/edit/$id'
-    | '/admin/googleAd/page/list/$page'
-    | '/admin/googleAd/saler/edit/$id'
-    | '/admin/googleAd/saler/list/$page'
+    | '/_layout/'
+    | '/_layout/images/'
+    | '/_layout/google_ad_page/page/'
+    | '/_layout/google_ad_page/saler/'
+    | '/_layout/travel/city/'
+    | '/_layout/travel/products/'
+    | '/_layout/google_ad_page/page/edit/$id'
+    | '/_layout/travel/city/edit/$id'
+    | '/_layout/travel/products/edit/$id'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AdminRouteRoute: typeof AdminRouteRouteWithChildren
-  LoginRoute: typeof LoginRoute
+  LayoutRouteRoute: typeof LayoutRouteRouteWithChildren
+  LoginRouteRoute: typeof LoginRouteRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AdminRouteRoute: AdminRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
+  LayoutRouteRoute: LayoutRouteRouteWithChildren,
+  LoginRouteRoute: LoginRouteRoute,
 }
 
 export const routeTree = rootRoute
@@ -380,74 +313,62 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/admin",
+        "/_layout",
         "/login"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/admin": {
-      "filePath": "admin/route.tsx",
+    "/_layout": {
+      "filePath": "_layout/route.tsx",
       "children": [
-        "/admin/PhotoLibrary",
-        "/admin/googleAd"
+        "/_layout/",
+        "/_layout/images/",
+        "/_layout/google_ad_page/page/",
+        "/_layout/google_ad_page/saler/",
+        "/_layout/travel/city/",
+        "/_layout/travel/products/",
+        "/_layout/google_ad_page/page/edit/$id",
+        "/_layout/travel/city/edit/$id",
+        "/_layout/travel/products/edit/$id"
       ]
     },
     "/login": {
-      "filePath": "login.tsx"
+      "filePath": "login/route.tsx"
     },
-    "/admin/PhotoLibrary": {
-      "filePath": "admin/PhotoLibrary/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/PhotoLibrary/list"
-      ]
+    "/_layout/": {
+      "filePath": "_layout.index/route.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd": {
-      "filePath": "admin/googleAd/route.tsx",
-      "parent": "/admin",
-      "children": [
-        "/admin/googleAd/page",
-        "/admin/googleAd/saler"
-      ]
+    "/_layout/images/": {
+      "filePath": "_layout.images/index.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd/page": {
-      "filePath": "admin/googleAd/page/route.tsx",
-      "parent": "/admin/googleAd",
-      "children": [
-        "/admin/googleAd/page/edit/$id",
-        "/admin/googleAd/page/list/$page"
-      ]
+    "/_layout/google_ad_page/page/": {
+      "filePath": "_layout.google_ad_page/page/index.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd/saler": {
-      "filePath": "admin/googleAd/saler/route.tsx",
-      "parent": "/admin/googleAd",
-      "children": [
-        "/admin/googleAd/saler/edit/$id",
-        "/admin/googleAd/saler/list/$page"
-      ]
+    "/_layout/google_ad_page/saler/": {
+      "filePath": "_layout.google_ad_page/saler/index.tsx",
+      "parent": "/_layout"
     },
-    "/admin/PhotoLibrary/list": {
-      "filePath": "admin/PhotoLibrary/list.tsx",
-      "parent": "/admin/PhotoLibrary"
+    "/_layout/travel/city/": {
+      "filePath": "_layout.travel/city/index.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd/page/edit/$id": {
-      "filePath": "admin/googleAd/page/edit.$id.tsx",
-      "parent": "/admin/googleAd/page"
+    "/_layout/travel/products/": {
+      "filePath": "_layout.travel/products/index.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd/page/list/$page": {
-      "filePath": "admin/googleAd/page/list.$page.tsx",
-      "parent": "/admin/googleAd/page"
+    "/_layout/google_ad_page/page/edit/$id": {
+      "filePath": "_layout.google_ad_page/page/edit.$id.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd/saler/edit/$id": {
-      "filePath": "admin/googleAd/saler/edit.$id.tsx",
-      "parent": "/admin/googleAd/saler"
+    "/_layout/travel/city/edit/$id": {
+      "filePath": "_layout.travel/city/edit.$id.tsx",
+      "parent": "/_layout"
     },
-    "/admin/googleAd/saler/list/$page": {
-      "filePath": "admin/googleAd/saler/list.$page.tsx",
-      "parent": "/admin/googleAd/saler"
+    "/_layout/travel/products/edit/$id": {
+      "filePath": "_layout.travel/products/edit.$id.tsx",
+      "parent": "/_layout"
     }
   }
 }
