@@ -21,6 +21,7 @@ import { Route as LayoutGoogleadpageSalerIndexImport } from './routes/_layout.go
 import { Route as LayoutGoogleadpagePageIndexImport } from './routes/_layout.google_ad_page/page/index'
 import { Route as LayoutTravelProductsEditIdImport } from './routes/_layout.travel/products/edit.$id'
 import { Route as LayoutTravelCityEditIdImport } from './routes/_layout.travel/city/edit.$id'
+import { Route as LayoutGoogleadpageSalerEditIdImport } from './routes/_layout.google_ad_page/saler/edit.$id'
 import { Route as LayoutGoogleadpagePageEditIdImport } from './routes/_layout.google_ad_page/page/edit.$id'
 
 // Create/Update Routes
@@ -87,6 +88,13 @@ const LayoutTravelCityEditIdRoute = LayoutTravelCityEditIdImport.update({
   path: '/travel/city/edit/$id',
   getParentRoute: () => LayoutRouteRoute,
 } as any)
+
+const LayoutGoogleadpageSalerEditIdRoute =
+  LayoutGoogleadpageSalerEditIdImport.update({
+    id: '/google_ad_page/saler/edit/$id',
+    path: '/google_ad_page/saler/edit/$id',
+    getParentRoute: () => LayoutRouteRoute,
+  } as any)
 
 const LayoutGoogleadpagePageEditIdRoute =
   LayoutGoogleadpagePageEditIdImport.update({
@@ -162,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutGoogleadpagePageEditIdImport
       parentRoute: typeof LayoutRouteImport
     }
+    '/_layout/google_ad_page/saler/edit/$id': {
+      id: '/_layout/google_ad_page/saler/edit/$id'
+      path: '/google_ad_page/saler/edit/$id'
+      fullPath: '/google_ad_page/saler/edit/$id'
+      preLoaderRoute: typeof LayoutGoogleadpageSalerEditIdImport
+      parentRoute: typeof LayoutRouteImport
+    }
     '/_layout/travel/city/edit/$id': {
       id: '/_layout/travel/city/edit/$id'
       path: '/travel/city/edit/$id'
@@ -189,6 +204,7 @@ interface LayoutRouteRouteChildren {
   LayoutTravelCityIndexRoute: typeof LayoutTravelCityIndexRoute
   LayoutTravelProductsIndexRoute: typeof LayoutTravelProductsIndexRoute
   LayoutGoogleadpagePageEditIdRoute: typeof LayoutGoogleadpagePageEditIdRoute
+  LayoutGoogleadpageSalerEditIdRoute: typeof LayoutGoogleadpageSalerEditIdRoute
   LayoutTravelCityEditIdRoute: typeof LayoutTravelCityEditIdRoute
   LayoutTravelProductsEditIdRoute: typeof LayoutTravelProductsEditIdRoute
 }
@@ -201,6 +217,7 @@ const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
   LayoutTravelCityIndexRoute: LayoutTravelCityIndexRoute,
   LayoutTravelProductsIndexRoute: LayoutTravelProductsIndexRoute,
   LayoutGoogleadpagePageEditIdRoute: LayoutGoogleadpagePageEditIdRoute,
+  LayoutGoogleadpageSalerEditIdRoute: LayoutGoogleadpageSalerEditIdRoute,
   LayoutTravelCityEditIdRoute: LayoutTravelCityEditIdRoute,
   LayoutTravelProductsEditIdRoute: LayoutTravelProductsEditIdRoute,
 }
@@ -219,6 +236,7 @@ export interface FileRoutesByFullPath {
   '/travel/city': typeof LayoutTravelCityIndexRoute
   '/travel/products': typeof LayoutTravelProductsIndexRoute
   '/google_ad_page/page/edit/$id': typeof LayoutGoogleadpagePageEditIdRoute
+  '/google_ad_page/saler/edit/$id': typeof LayoutGoogleadpageSalerEditIdRoute
   '/travel/city/edit/$id': typeof LayoutTravelCityEditIdRoute
   '/travel/products/edit/$id': typeof LayoutTravelProductsEditIdRoute
 }
@@ -232,6 +250,7 @@ export interface FileRoutesByTo {
   '/travel/city': typeof LayoutTravelCityIndexRoute
   '/travel/products': typeof LayoutTravelProductsIndexRoute
   '/google_ad_page/page/edit/$id': typeof LayoutGoogleadpagePageEditIdRoute
+  '/google_ad_page/saler/edit/$id': typeof LayoutGoogleadpageSalerEditIdRoute
   '/travel/city/edit/$id': typeof LayoutTravelCityEditIdRoute
   '/travel/products/edit/$id': typeof LayoutTravelProductsEditIdRoute
 }
@@ -247,6 +266,7 @@ export interface FileRoutesById {
   '/_layout/travel/city/': typeof LayoutTravelCityIndexRoute
   '/_layout/travel/products/': typeof LayoutTravelProductsIndexRoute
   '/_layout/google_ad_page/page/edit/$id': typeof LayoutGoogleadpagePageEditIdRoute
+  '/_layout/google_ad_page/saler/edit/$id': typeof LayoutGoogleadpageSalerEditIdRoute
   '/_layout/travel/city/edit/$id': typeof LayoutTravelCityEditIdRoute
   '/_layout/travel/products/edit/$id': typeof LayoutTravelProductsEditIdRoute
 }
@@ -263,6 +283,7 @@ export interface FileRouteTypes {
     | '/travel/city'
     | '/travel/products'
     | '/google_ad_page/page/edit/$id'
+    | '/google_ad_page/saler/edit/$id'
     | '/travel/city/edit/$id'
     | '/travel/products/edit/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -275,6 +296,7 @@ export interface FileRouteTypes {
     | '/travel/city'
     | '/travel/products'
     | '/google_ad_page/page/edit/$id'
+    | '/google_ad_page/saler/edit/$id'
     | '/travel/city/edit/$id'
     | '/travel/products/edit/$id'
   id:
@@ -288,6 +310,7 @@ export interface FileRouteTypes {
     | '/_layout/travel/city/'
     | '/_layout/travel/products/'
     | '/_layout/google_ad_page/page/edit/$id'
+    | '/_layout/google_ad_page/saler/edit/$id'
     | '/_layout/travel/city/edit/$id'
     | '/_layout/travel/products/edit/$id'
   fileRoutesById: FileRoutesById
@@ -327,6 +350,7 @@ export const routeTree = rootRoute
         "/_layout/travel/city/",
         "/_layout/travel/products/",
         "/_layout/google_ad_page/page/edit/$id",
+        "/_layout/google_ad_page/saler/edit/$id",
         "/_layout/travel/city/edit/$id",
         "/_layout/travel/products/edit/$id"
       ]
@@ -360,6 +384,10 @@ export const routeTree = rootRoute
     },
     "/_layout/google_ad_page/page/edit/$id": {
       "filePath": "_layout.google_ad_page/page/edit.$id.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/google_ad_page/saler/edit/$id": {
+      "filePath": "_layout.google_ad_page/saler/edit.$id.tsx",
       "parent": "/_layout"
     },
     "/_layout/travel/city/edit/$id": {

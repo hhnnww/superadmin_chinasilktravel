@@ -56,7 +56,7 @@ function RouteComponent() {
 							<form.AppField name={field.name} key={field.name}>
 								{(item) => (
 									<item.TextField
-										text_field_props={{ type: field.inputProps.type }}
+										TextFieldProps={{ type: field.inputProps.type }}
 									/>
 								)}
 							</form.AppField>

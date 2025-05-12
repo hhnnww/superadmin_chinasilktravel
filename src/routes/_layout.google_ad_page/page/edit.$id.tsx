@@ -19,7 +19,7 @@ function RouteComponent() {
 
 	// 获取当前页面的内容
 	const query = useQuery({
-		queryKey: ["googleAdPageEdit", params.id],
+		queryKey: ["google", "page", "single", params.id],
 		queryFn: async () => {
 			const page = (
 				await supabaseClient
@@ -67,6 +67,7 @@ function RouteComponent() {
 			{query?.data?.page && (
 				<GoogleAdPageEditItem value={query.data.page} label={"adpage"} />
 			)}
+
 			{query.data?.comments.data?.map((item, index) => (
 				<GoogleAdPageEditItem
 					value={item}

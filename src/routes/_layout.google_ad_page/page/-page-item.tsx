@@ -1,3 +1,6 @@
+import { CustomButtonLink } from "@/component/ButtonLink";
+import { supabaseClient } from "@/supabase";
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import {
 	Box,
 	Button,
@@ -13,11 +16,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Database } from "database.types";
 import dayjs from "dayjs";
 
-import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
-
-import { CustomButtonLink } from "@/component/ButtonLink";
-import { supabaseClient } from "@/supabase";
-
 export const GoogleAdPageItem = (
 	props: Database["public"]["Tables"]["googleAdPage"]["Row"],
 ) => {
@@ -25,8 +23,9 @@ export const GoogleAdPageItem = (
 	const mutationDelete = useMutation({
 		mutationFn: async () =>
 			await supabaseClient.from("googleAdPage").delete().eq("id", props.id),
-		onSuccess: () =>
-			queryClient.invalidateQueries({ queryKey: ["googleAdPages"] }),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["googlead", "page", "list"] });
+		},
 	});
 	return (
 		<>

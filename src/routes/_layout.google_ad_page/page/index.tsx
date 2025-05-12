@@ -22,7 +22,7 @@ function RouteComponent() {
 
 	// 获取所有的GoogleAdPage
 	const query = useQuery({
-		queryKey: ["googleAdPages"],
+		queryKey: ["googlead", "page", "list"],
 		queryFn: async () =>
 			await supabaseClient
 				.from("googleAdPage")

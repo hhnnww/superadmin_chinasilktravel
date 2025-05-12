@@ -1,15 +1,12 @@
+import { PageTitle } from "@/component/PageTitle";
+import { supabaseStroga } from "@/supabase";
+import HomeMiniOutlinedIcon from "@mui/icons-material/HomeMiniOutlined";
+import KeyboardDoubleArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftOutlined";
+import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 import { Button, ButtonGroup, Grid } from "@mui/material";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-
-import HomeMiniOutlinedIcon from "@mui/icons-material/HomeMiniOutlined";
-import KeyboardDoubleArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftOutlined";
-import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
-
-import { PageTitle } from "@/component/PageTitle";
-import { supabaseStroga } from "@/supabase";
-
 import { PhotoItem } from "./-photo-item";
 import { UpItem } from "./-up-item";
 
@@ -26,7 +23,7 @@ function RouteComponent() {
 	const query = useQuery({
 		queryKey: ["images", page],
 		queryFn: async () =>
-			await supabaseStroga.list("", { limit: limit, offset: offset }),
+			(await supabaseStroga.list("", { limit: limit, offset: offset })).data,
 		placeholderData: keepPreviousData,
 	});
 
@@ -34,23 +31,30 @@ function RouteComponent() {
 	const ImageNavi = () => (
 		<Grid size={12}>
 			<ButtonGroup variant="contained">
-				{page > 1 && (
-					<Button
-						startIcon={<HomeMiniOutlinedIcon />}
-						onClick={() => setPage(1)}
-					>
-						home
-					</Button>
-				)}
-				{page > 1 && (
-					<Button
-						startIcon={<KeyboardDoubleArrowLeftOutlinedIcon />}
-						onClick={() => setPage(page - 1)}
-					>
-						prev
-					</Button>
-				)}
+				<Button
+					startIcon={<HomeMiniOutlinedIcon />}
+					onClick={() => {
+						if (page > 1) {
+							setPage(1);
+						}
+					}}
+				>
+					home
+				</Button>
+
+				<Button
+					startIcon={<KeyboardDoubleArrowLeftOutlinedIcon />}
+					onClick={() => {
+						if (page > 1) {
+							setPage(page - 1);
+						}
+					}}
+				>
+					prev
+				</Button>
+
 				<Button>{page}</Button>
+
 				<Button
 					endIcon={<KeyboardDoubleArrowRightOutlinedIcon />}
 					onClick={() => setPage(page + 1)}
@@ -67,7 +71,7 @@ function RouteComponent() {
 			<ImageNavi />
 			<Grid size={12}>
 				<Grid container spacing={2}>
-					{query.data?.data?.map((item) => (
+					{query.data?.map((item) => (
 						<PhotoItem name={item.name} key={item.name} />
 					))}
 				</Grid>

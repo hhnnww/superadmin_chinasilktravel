@@ -26,9 +26,9 @@ export const PhotoItem = (props: { name: string }) => {
 			}
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ["images", 1],
-			});
+			queryClient.setQueryData(["images", 1], (oldData: { name: string }[]) =>
+				oldData.filter((item) => item.name !== props.name),
+			);
 		},
 	});
 

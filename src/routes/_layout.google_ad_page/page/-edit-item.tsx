@@ -49,7 +49,7 @@ export const GoogleAdPageEditItem = (props: {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["googleAdPageEdit", params.id],
+				queryKey: ["google", "page", "single", params.id],
 			});
 		},
 	});
@@ -64,6 +64,7 @@ export const GoogleAdPageEditItem = (props: {
 	type FormItemType = {
 		name: keyof Database["public"]["Tables"]["googleAdPage"]["Row"];
 		size: number;
+		type?: string;
 		inpuProps?: TextFieldProps;
 	};
 
@@ -74,7 +75,7 @@ export const GoogleAdPageEditItem = (props: {
 		{ name: "address", size: 3 },
 		{ name: "star", size: 3, inpuProps: { type: "number" } },
 		{ name: "publish_date", size: 3, inpuProps: { type: "date" } },
-		{ name: "avatar", size: 12 },
+		{ name: "avatar", size: 12, type: "image" },
 		{ name: "content", size: 12, inpuProps: { multiline: true, minRows: 5 } },
 	];
 
@@ -94,16 +95,31 @@ export const GoogleAdPageEditItem = (props: {
 								{props.label}
 							</Typography>
 						</Grid>
-						{form_items.map((item) => (
-							<form.AppField name={item.name} key={item.name}>
-								{(field) => (
-									<field.TextField
-										size={item.size}
-										text_field_props={item.inpuProps}
-									/>
-								)}
-							</form.AppField>
-						))}
+						{form_items.map((item) =>
+							item.type === "image" ? (
+								<form.AppField key={props.value.id.toString()} name={item.name}>
+									{(field) => (
+										<field.ImageField
+											id={props.value.id.toString()}
+											transform={{ width: 200, height: 200, quality: 30 }}
+										/>
+									)}
+								</form.AppField>
+							) : (
+								<form.AppField key={props.value.id.toString()} name={item.name}>
+									{(field) => (
+										<field.TextField
+											size={item.size}
+											TextFieldProps={{
+												label: item.name,
+												type: item.inpuProps?.type,
+												...item.inpuProps,
+											}}
+										/>
+									)}
+								</form.AppField>
+							),
+						)}
 
 						<Grid size={12}>
 							<form.AppForm>

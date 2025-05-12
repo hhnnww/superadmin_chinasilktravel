@@ -1,6 +1,7 @@
 import { supabaseStroga } from "@/supabase";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import { Box, Button, LinearProgress, Typography } from "@mui/material";
+import CachedOutlinedIcon from "@mui/icons-material/CachedOutlined";
+import { Button, LinearProgress, Stack, Typography } from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { customAlphabet } from "nanoid";
 import { lowercase } from "nanoid-dictionary";
@@ -19,6 +20,9 @@ export const UpItem = () => {
 	const mutation = useMutation({
 		mutationFn: async (files: FileList | null) => {
 			if (!files) return;
+
+			const upfileList: { name: string }[] = [];
+
 			setUpState((draft) => {
 				draft.total = files.length;
 			});
@@ -30,7 +34,8 @@ export const UpItem = () => {
 				});
 				const nano = customAlphabet(lowercase + numbers, 10);
 				const new_name = `${nano().toString()}.jpg`;
-				await supabaseStroga.update(new_name, file);
+				const res = (await supabaseStroga.update(new_name, file)).data?.path;
+				upfileList.push({ name: res || "" });
 			}
 
 			setUpState((draft) => {
@@ -38,45 +43,66 @@ export const UpItem = () => {
 				draft.current = 0;
 				draft.name = "";
 			});
+
+			return upfileList.reverse();
 		},
 
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["images", 1] });
+		onSuccess: (data) => {
+			queryClient.setQueryData(["images", 1], (oldData: { name: string }[]) => [
+				...(data || []),
+				...oldData,
+			]);
 		},
 	});
 
 	return (
 		<>
-			<Button
-				startIcon={<AddPhotoAlternateOutlinedIcon />}
-				component={"label"}
-				htmlFor="file-upload"
-				loading={mutation.isPending}
+			<Stack
+				direction={"column"}
+				spacing={4}
+				alignItems={"start"}
+				sx={{ width: "100%" }}
 			>
-				update images
-			</Button>
+				<Stack direction={"row"} spacing={1}>
+					<Button
+						startIcon={<AddPhotoAlternateOutlinedIcon />}
+						component={"label"}
+						htmlFor="file-upload"
+						loading={mutation.isPending}
+					>
+						update images
+					</Button>
+					<Button
+						onClick={() =>
+							queryClient.invalidateQueries({ queryKey: ["images", 1] })
+						}
+						startIcon={<CachedOutlinedIcon />}
+					>
+						refersh
+					</Button>
+				</Stack>
+				<input
+					id="file-upload"
+					type="file"
+					multiple
+					onChange={(e) => {
+						mutation.mutateAsync(e.target.files).then(() => {
+							e.target.value = "";
+						});
+					}}
+					style={{ display: "none" }}
+				/>
 
-			<input
-				id="file-upload"
-				type="file"
-				multiple
-				onChange={(e) => {
-					mutation.mutateAsync(e.target.files).then(() => {
-						e.target.value = "";
-					});
-				}}
-				style={{ display: "none" }}
-			/>
-
-			{upState.total > 0 && (
-				<Box sx={{ width: "100%", mt: 4 }}>
-					<Typography>{`正在上传:${upState.name} ${upState.current} / ${upState.total}`}</Typography>
-					<LinearProgress
-						variant="determinate"
-						value={(upState.current / upState.total) * 100}
-					/>
-				</Box>
-			)}
+				{upState.total > 0 && (
+					<Stack spacing={2} sx={{ width: "100%", mt: 4 }}>
+						<Typography>{`正在上传:${upState.name} ${upState.current} / ${upState.total}`}</Typography>
+						<LinearProgress
+							variant="determinate"
+							value={(upState.current / upState.total) * 100}
+						/>
+					</Stack>
+				)}
+			</Stack>
 		</>
 	);
 };
