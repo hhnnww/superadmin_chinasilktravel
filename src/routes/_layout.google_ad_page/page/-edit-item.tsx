@@ -99,7 +99,7 @@ export const GoogleAdPageEditItem = (props: {
 							item.type === "image" ? (
 								<form.AppField key={props.value.id.toString()} name={item.name}>
 									{(field) => (
-										<field.ImageField
+										<field.AvaTarField
 											id={props.value.id.toString()}
 											transform={{ width: 200, height: 200, quality: 30 }}
 										/>

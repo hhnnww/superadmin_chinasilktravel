@@ -98,9 +98,10 @@ const TextField = (props: {
 				onBlur={() => field.handleBlur()}
 				error={!field.state.meta.isValid}
 				onChange={(e) => field.handleChange(e.target.value)}
-				helperText={field.state.meta.errors
-					.map((item) => item.message)
-					.join("")}
+				helperText={
+					field.state.meta.errors.map((item) => item.message).join("") +
+					props.TextFieldProps?.helperText
+				}
 				autoComplete="off"
 				fullWidth
 			/>
@@ -130,7 +131,7 @@ function SubscribeButton(props: ButtonProps & { children: ReactNode }) {
 export const { useAppForm, withForm } = createFormHook({
 	fieldComponents: {
 		TextField,
-		ImageField: AvaTarField,
+		AvaTarField,
 	},
 	formComponents: {
 		SubscribeButton,

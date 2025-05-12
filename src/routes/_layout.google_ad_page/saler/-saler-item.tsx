@@ -19,14 +19,24 @@ export const SalerItem = (
 
 	const mutataionDelete = useMutation({
 		mutationFn: async () =>
-			await supabaseClient.from("googleAdSaler").delete().eq("id", props.id),
+			await supabaseClient
+				.from("googleAdSaler")
+				.delete()
+				.eq("id", Number(props.id)),
 
-		onSuccess: ({ data }) => {
-			console.log(data);
-			queryClient.invalidateQueries({
-				queryKey: ["googlead", "saler", "list"],
-			});
-		},
+		onSuccess: () =>
+			queryClient.setQueryData(
+				["googlead", "saler", "list"],
+				(oldData: {
+					data: Database["public"]["Tables"]["googleAdSaler"]["Row"][];
+				}) => {
+					if (!oldData) return oldData;
+					return {
+						...oldData,
+						data: oldData?.data?.filter((item) => item.id !== props.id),
+					};
+				},
+			),
 	});
 	return (
 		<>
